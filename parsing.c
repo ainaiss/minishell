@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 21:12:36 by abarchil         ###   ########.fr       */
+/*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
+/*   Updated: 2021/12/19 13:14:56 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-char	*parsing_export_command(char *command, t_export *export)
-{
-	char	**splited_command;
-	int		count;
+// int		parse_command(char *commands)
+// {
+// 	char	*new_command;
+// 	char	**splited_command;
+// 	int		count;
+// 	new_command = ft_strdup(ft_strtrim(commands, " 	"));
+// 	if (!new_command)
+// 		return (NULL);
+// 	free(commands);
+// 	splited_command = ft_split(new_command, ' ');
+// 	if (!splited_command)
+// 		return (NULL);
+// }
 
-	count = 0;
-	command = command + 6;
-	while (command[count]  && command[count] != '=')
-		count++;
-	if (command[count] == '\0')
-		ft_export(command, export);
-	
-}
-
-char    **ft_export(char *var, t_export *export)
-{
-	ft_lstadd_back(export, ft_lstnew(ft_strdup(var)));
-}

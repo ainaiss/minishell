@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 21:12:36 by abarchil         ###   ########.fr       */
+/*   Created: 2021/12/05 05:02:29 by abarchil          #+#    #+#             */
+/*   Updated: 2021/12/19 17:09:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-char	*parsing_export_command(char *command, t_export *export)
+char	*get_next_line(int fd)
 {
-	char	**splited_command;
-	int		count;
+	int		byte;
+	int		i;
+	char	line[1000000];
+	char	buffer[1];
 
-	count = 0;
-	command = command + 6;
-	while (command[count]  && command[count] != '=')
-		count++;
-	if (command[count] == '\0')
-		ft_export(command, export);
-	
-}
-
-char    **ft_export(char *var, t_export *export)
-{
-	ft_lstadd_back(export, ft_lstnew(ft_strdup(var)));
+	ft_bzero(line, 1000000);
+	i = 0;
+	byte = 1;
+	while (byte > 0)
+	{
+		byte = read(fd, buffer, 1);
+		line[i++] = buffer[0];
+		if (buffer[0] == '\n')
+			return (ft_strdup(line));
+	}
+	if (!line[0])
+		return (NULL);
+	return (ft_strdup(line));
 }

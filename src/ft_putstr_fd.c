@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 21:12:36 by abarchil         ###   ########.fr       */
+/*   Created: 2021/08/28 23:16:50 by abarchil          #+#    #+#             */
+/*   Updated: 2021/12/19 17:04:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-char	*parsing_export_command(char *command, t_export *export)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	**splited_command;
-	int		count;
+	int	count;
 
 	count = 0;
-	command = command + 6;
-	while (command[count]  && command[count] != '=')
+	if (!s)
+		return ;
+	while (s[count])
+	{
+		ft_putchar_fd(s[count], fd);
 		count++;
-	if (command[count] == '\0')
-		ft_export(command, export);
-	
-}
-
-char    **ft_export(char *var, t_export *export)
-{
-	ft_lstadd_back(export, ft_lstnew(ft_strdup(var)));
+	}
 }

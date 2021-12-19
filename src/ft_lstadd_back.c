@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 21:12:36 by abarchil         ###   ########.fr       */
+/*   Created: 2021/10/17 17:36:07 by abarchil          #+#    #+#             */
+/*   Updated: 2021/12/19 17:13:10 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-char	*parsing_export_command(char *command, t_export *export)
+void	ft_lstadd_back(t_export *lst, t_export *new)
 {
-	char	**splited_command;
-	int		count;
+	t_export	*tmp;
 
-	count = 0;
-	command = command + 6;
-	while (command[count]  && command[count] != '=')
-		count++;
-	if (command[count] == '\0')
-		ft_export(command, export);
-	
-}
-
-char    **ft_export(char *var, t_export *export)
-{
-	ft_lstadd_back(export, ft_lstnew(ft_strdup(var)));
+	tmp = lst;
+	if (lst)
+	{
+		if (lst == NULL)
+			lst = new;
+		else
+		{
+			while (tmp->next != NULL)
+				tmp = tmp->next;
+			tmp->next = new;
+			tmp = NULL;
+		}
+	}
 }
