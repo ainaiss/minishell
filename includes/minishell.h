@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 20:29:32 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:17:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct t_export_variable
 {
 	char					*variable;
 	int						print;
-	struct t_export_varible *next;
+	struct t_export_variable *next;
 } t_export;
 
 typedef struct t_command_history
@@ -71,16 +71,19 @@ size_t		ft_strlen(const char *s);
 char		*get_next_line(int fd);
 int    		ft_strcmp(const char *s1, const char *s2);
 t_export	*ft_lstlast(t_export *lst);
-char	*ft_strchr(const char *s, int c);
+char		*ft_strchr(const char *s, int c);
+char		*ft_strtrim(char const *s1, char const *set);
+
 /* export command */
 
 void		ft_pwd(void);
 void		history_init(t_history *history, char *command);
 void		env_command(char **env);
-void		check_command(char *command, char **env);
-char   		**ft_export(char *var, t_export *export);
+void		check_command(char *command, char **env, t_export *export);
+void		ft_export(char *var, t_export *export);
 void		environment_init(char **env, t_export *export);
 t_export	*ft_lstnew(void *content);
 void		ft_lstadd_back(t_export *lst, t_export *new);
-
+void		parsing_export_command(char *command, t_export *export);
+void 		print_export(t_export *export);
 #endif

@@ -6,20 +6,27 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 21:05:53 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:19:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
-void	check_command(char *command, char **env)
+void	check_command(char *command, char **env, t_export *export)
 {
+	command = ft_strtrim(command, " 	");
 	if (!ft_strcmp(command, "env"))
 		env_command(env);
 	else if (!ft_strcmp(command, "pwd"))
 		ft_pwd();
 	else if (!ft_strcmp(command, "exit"))
 			exit(0);
-	else if (!ft_memcmp(command, "export", 6)){}
+	else if (!ft_memcmp(command, "export", 6))
+	{
+		if (!ft_strcmp(command, "export"))
+			print_export(export);
+		else
+			parsing_export_command(command, export);
+	}
 }
 
 int main(int argc, char **argv, char **env)
@@ -38,7 +45,7 @@ int main(int argc, char **argv, char **env)
 	while (TRUE)
 	{
 		str = readline("\e[1;91mminishell_> \e[0m");
-		check_command(str, env);
+		check_command(str, env, &export);
 		history_init(&history, str);
 		free(str);
 	}
