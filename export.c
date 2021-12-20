@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 01:01:40 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 01:53:15 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	parsing_export_command(char *command, t_export *export)
 		if (ft_strlen(equal) > 1)
 			ft_export(command, export, YES);
 		else
-			ft_export(command, export, NO);
+			ft_export(ft_strjoin(command, "''"), export, NO);
 	}
 }
 

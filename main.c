@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 00:08:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 02:53:19 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	check_command(char *command, char **env, t_export *export)
 		else
 			parsing_export_command(command, export);
 	}
+	else if (!ft_memcmp(command, "cd", 2))
+		ft_cd(command);
 }
 
 int main(int argc, char **argv, char **env)

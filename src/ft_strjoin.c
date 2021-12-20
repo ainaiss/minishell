@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:31:36 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/19 17:03:06 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 01:52:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s2_count++;
 	}
 	result_tab[s1_count] = '\0';
-	free((char *)s1);
 	return (result_tab);
 }

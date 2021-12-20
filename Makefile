@@ -6,11 +6,11 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/19 21:49:42 by abarchil         ###   ########.fr        #
+#    Updated: 2021/12/20 02:51:59 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILE = main.c export.c $(wildcard src/*.c) minishell_init.c env.c pwd.c
+SRC_FILE = main.c export.c $(wildcard src/*.c) minishell_init.c env.c pwd.c cd.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 00:07:22 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 02:55:57 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ t_export	*ft_lstnew(void *content);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 void		parsing_export_command(char *command, t_export *export);
 void 		print_export(t_export *export);
+void		ft_cd(char *command);
 #endif
