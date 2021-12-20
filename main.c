@@ -6,16 +6,17 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 23:19:36 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 00:08:18 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
 void	check_command(char *command, char **env, t_export *export)
 {
+	(void)env;
 	command = ft_strtrim(command, " 	");
 	if (!ft_strcmp(command, "env"))
-		env_command(env);
+		env_command(export);
 	else if (!ft_strcmp(command, "pwd"))
 		ft_pwd();
 	else if (!ft_strcmp(command, "exit"))

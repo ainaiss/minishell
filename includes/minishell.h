@@ -6,39 +6,38 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/19 23:17:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/20 00:07:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <curses.h>
-#include <term.h>
-#include <signal.h>
-#include <sys/types.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-# define M_KEY_UP 4283163
-# define M_KEY_DOWN 4348699
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <stdlib.h>
+# include <curses.h>
+# include <term.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # define GREEN "\e[0;32m"
 # define RESET "\e[0m"
 # define RED "\e[1;91m"
 # define TRUE 1
+# define YES 1
 # define FALSE 0
-
+# define NO 0
 typedef struct t_export_variable
 {
 	char					*variable;
-	int						print;
+	int						print_exec;
 	struct t_export_variable *next;
 } t_export;
 
@@ -78,9 +77,9 @@ char		*ft_strtrim(char const *s1, char const *set);
 
 void		ft_pwd(void);
 void		history_init(t_history *history, char *command);
-void		env_command(char **env);
+void		env_command(t_export *export);
 void		check_command(char *command, char **env, t_export *export);
-void		ft_export(char *var, t_export *export);
+void		ft_export(char *var, t_export *export, int exec_print);
 void		environment_init(char **env, t_export *export);
 t_export	*ft_lstnew(void *content);
 void		ft_lstadd_back(t_export *lst, t_export *new);
