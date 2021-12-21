@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/21 11:02:01 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:52:11 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char		*ft_substr(char const *s, int start, size_t len);
 /* minishell */
 
 void		ft_pwd(void);
+void		ft_echo(char *command, t_export *export);
 void		env_command(t_export *export);
 void		check_command(char *command, char **env, t_export *export);
 void		ft_export(char *var, t_export *export, int exec_print);
