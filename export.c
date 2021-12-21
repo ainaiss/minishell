@@ -3,57 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:58:02 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 19:52:54 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/21 07:39:12 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-
-// char	*export_single_quotes(char *command)
-// {
-// 	char	*single_quotes;
+char	*set_double_quotes(char *command)
+{
+	int		count;
+	char	*new_command;
 	
-// 	single_quotes = ft_strchr(command, '\'');
-// 	if (!single_quotes)
-// 		return (NULL);
-// 	else if (single_quotes && ft_strchr(single_quotes + 1, '\''))
-// 		return (remchar(command, '\''));
-// 	else if (single_quotes && !ft_strchr(single_quotes + 1, '\''))
-// 		return (NULL)
-// }
-
+	count = 0;
+	new_command = ft_strdup("");
+	while (command[count] && command[count] != '=')
+		count++;
+	if (!command[count])
+		return (command);
+	count++;
+	new_command = ft_memmove(new_command, command, count);
+	new_command = ft_strjoin(new_command, "\"");
+	new_command = ft_strjoin(new_command, &command[count]);
+	new_command = ft_strjoin(new_command, "\"");
+	//free(command);
+	return (new_command);
+}
 void	parsing_export_command(char *command, t_export *export)
 {
 	char	*equal;
 	char	*quotes;
-	//char	*without_quotes;
+	char	*single_quotes;
 	command = command + 6;
 	equal = ft_strchr(command, '=');
 	quotes = ft_strchr(command, 34);
-	if (!equal)
-		ft_export(command, export, NO);
-
-	// if (quotes && !ft_strchr(quotes + 1, 34))
-	// 	ft_putstr_fd("dquot error\n", 1);
-	// if(quotes && ft_strchr(quotes + 1, 34))
-	// {
-	// 	without_quotes = remchar(command, 32);
-		
-	// 	ft_export(without_quotes, export, NO);
-	// }
-	else
+	single_quotes = ft_strchr(command, '\'');
+	if (quotes)
 	{
-		if (command[ft_strchr_index(command, '=') - 1] == ' ' && ft_strlen(equal) > 1)
-			ft_putstr_fd("minishell : bad assigment\n", 1);
-		if (ft_strlen(equal) > 1)
-			ft_export(command, export, YES);
-		else
-			ft_export(command, export, YES);
+		if (!ft_strchr(quotes + 1, 34))
+		{
+			ft_putstr_fd("dquot error\n", 1);
+			return ;
+		}
+		command = remchar(command, 34);
 	}
+	else if (single_quotes)
+	{
+		if (!ft_strchr(single_quotes + 1, '\''))
+		{
+			ft_putstr_fd("dquot error\n", 1);
+			return ;
+		}
+		command = remchar(command, '\'');
+	}
+	if (equal)
+		ft_export(set_double_quotes(command), export, YES);
+	else
+		ft_export(command, export, NO);
 }
 
 void	print_export(t_export *export)

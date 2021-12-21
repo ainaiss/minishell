@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 20:28:24 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:49:09 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		ft_bzero(void *s, size_t n);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
+void		ft_del_node(t_export *lst, char *content);
 t_export	*ft_lstnew(void *content);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
@@ -67,12 +68,15 @@ char		*ft_strtrim(char const *s1, char const *set);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 int			ft_strchr_index(char *s, int c);
 char   		*remchar(char *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, int start, size_t len);
 /* minishell */
 
 void		ft_pwd(void);
 void		env_command(t_export *export);
 void		check_command(char *command, char **env, t_export *export);
 void		ft_export(char *var, t_export *export, int exec_print);
+void		ft_unset(char *command, t_export *export);
 void		environment_init(char **env, t_export *export);
 t_export	*ft_lstnew(void *content);
 void		parsing_export_command(char *command, t_export *export);

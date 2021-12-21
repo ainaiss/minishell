@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/20 20:27:38 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/21 08:15:53 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	check_command(char *command, char **env, t_export *export)
 	}
 	else if (!ft_memcmp(command, "cd", 2))
 		ft_cd(command);
+	else if (!ft_memcmp(command, "unset", 5))
+		ft_unset(command, export);
 }
 
 int	main(int argc, char **argv, char **env)

@@ -4,5 +4,6 @@
 		"stddef.h": "c",
 		"minishell.h": "c",
 		"stdio.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }
