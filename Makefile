@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
+#    By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/21 14:52:24 by abarchil         ###   ########.fr        #
+#    Updated: 2021/12/21 16:00:43 by fel-boua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,10 @@ $(NAME) : $(OBJ_FILE)
 	@$(CC) $(CFLAGS) $(OBJ_FILE)  -lreadline -o $(NAME)
 
 clean :
-	@echo "$(YELLOW)------------ REMOVING OBJECT FILES"
+	@echo "$(YELLOW)------------ REMOVING OBJECT FILES$(RESET)"
 	@rm -rf $(OBJ_FILE)
 fclean : clean
-	@echo "$(YELLOW)------------ REMOVING MINISHELL"
+	@echo "$(YELLOW)------------ REMOVING MINISHELL$(RESET)"
 	@rm -rf $(NAME)
 re : fclean all
 

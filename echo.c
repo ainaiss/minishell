@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:03:33 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/21 14:55:14 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:02:25 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void	ft_echo(char *command, t_export *export)
 {
-	(void)export;
 	int		count;
+	int		arg_count;
 	char	*string;
-	char	*single_quotes;
-
+	char	**splited_arg;
+	
 	count = 0;
-	string = ft_strtrim(command, "echo");
-	single_quotes = ft_strchr(string, '\'');
-	if (single_quotes && !ft_strchr(single_quotes + 1, '\''))
-	{
-		ft_putstr_fd("quotes error\n", 1);
-		return ;
-	}
-	else if (single_quotes && ft_strchr(single_quotes + 1, '\''))
-		ft_putstr_fd(string, 1);
+	arg_count = -1;
+	(void)export;
+	while (command[count] && command[count] != ' ')
+		count++;
+	while (command[count] && command[count] == ' ')
+		count++;
+	string = &command[count];
+	splited_arg = ft_split(string, ' ');
+	while (splited_arg[++arg_count + 1])
+		printf("%s ", splited_arg[arg_count]);
+	if (string[0] == '-' && string[1] == 'n')
+		printf("%s", splited_arg[arg_count]);
 	else
-		printf("%s\n", string);
+		printf("%s\n", splited_arg[arg_count]);
+
+	access("filename", X_OK)
 }
