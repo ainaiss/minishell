@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/21 08:49:09 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/21 11:02:01 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ char		*ft_strtrim(char const *s1, char const *set);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 int			ft_strchr_index(char *s, int c);
 char   		*remchar(char *s, char c);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_substr(char const *s, int start, size_t len);
+int			ft_isalpha(int c);
+void		*ft_calloc(size_t count, size_t size);
+char		*ft_substr(char const *s, int start, size_t len);
 /* minishell */
 
 void		ft_pwd(void);
