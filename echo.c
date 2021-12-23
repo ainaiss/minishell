@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:03:33 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/21 18:02:25 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:32:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,4 @@ void	ft_echo(char *command, t_export *export)
 		printf("%s", splited_arg[arg_count]);
 	else
 		printf("%s\n", splited_arg[arg_count]);
-
-	access("filename", X_OK)
 }

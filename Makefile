@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+         #
+#    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/21 16:00:43 by fel-boua         ###   ########.fr        #
+#    Updated: 2021/12/22 13:32:49 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILE = main.c export.c $(wildcard src/*.c) minishell_init.c env.c pwd.c cd.c unset.c echo.c
-
+SRC_FILE = main.c export.c $(wildcard src/*.c) minishell_init.c env.c pwd.c cd.c unset.c echo.c \
+	parsing.c
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
 NAME = minishell

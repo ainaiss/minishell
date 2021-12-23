@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/21 14:52:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 02:46:19 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,20 @@ void	check_command(char *command, char **env, t_export *export)
 int	main(int argc, char **argv, char **env)
 {
 	t_export	export;
-	char		*str;
-	char		*buf;
+	char		*command;
 
 	argc--;
-	buf = NULL;
-	(void)argc;
 	(void)argv;
-	(void)env;
 	environment_init(env, &export);
 	while (TRUE)
 	{
-		str = readline("\e[1;91mminishell_> \e[0m");
-		add_history(str);
-		check_command(str, env, &export);
-		free(str);
+		command = readline("\e[1;91mminishell_> \e[0m");
+		add_history(command);
+		command = lexing(command);
+		//put_lexing(command);
+		check_lexing_syntax(command);
+		check_command(command, env, &export);
+		free(command);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/21 14:52:11 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 03:05:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 # define YES 1
 # define FALSE 0
 # define NO 0
+# define PIPE -1
+# define REDIRECTION_IN -2
+# define REDIRECTION_OUT -3
+# define REDIRECTION_OUT_APPEND -4
+# define HER_DOC -5
+# define DOLLAR_SIGNE -6
+# define DELIMITER -7
 
 typedef struct t_export_variable
 {
@@ -42,8 +49,7 @@ typedef struct t_export_variable
 	struct t_export_variable	*next;
 }	t_export;
 
-
-/** libft **/
+/******************************** libft *************************************************************/
 void		ft_bzero(void *s, size_t n);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 void		*ft_memchr(const void *s, int c, size_t n);
@@ -71,17 +77,32 @@ char   		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
-/* minishell */
+/******************************** minishell *************************************************************/
+						
+						/******** builtins *******/
 
 void		ft_pwd(void);
+void		ft_cd(char *command);
 void		ft_echo(char *command, t_export *export);
-void		env_command(t_export *export);
-void		check_command(char *command, char **env, t_export *export);
 void		ft_export(char *var, t_export *export, int exec_print);
 void		ft_unset(char *command, t_export *export);
+void		env_command(t_export *export);
+
+						/********** lixing **********/
+
+char		*lexing(char *command);
+void		check_lexing_syntax(char *command);
+int			lexing_first_char(char character);
+
+						/******** parsing *******/
+
+void		check_command(char *command, char **env, t_export *export);
 void		environment_init(char **env, t_export *export);
 t_export	*ft_lstnew(void *content);
 void		parsing_export_command(char *command, t_export *export);
 void		print_export(t_export *export);
-void		ft_cd(char *command);
+
+						/******** temporary_functions *******/
+
+void	put_lexing(char *command);
 #endif
