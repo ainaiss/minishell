@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/23 03:05:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 05:23:45 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void		env_command(t_export *export);
 char		*lexing(char *command);
 void		check_lexing_syntax(char *command);
 int			lexing_first_char(char character);
+int			lexing_last_char(char *command);
+int			check_quotes(char *command);
 
 						/******** parsing *******/
 

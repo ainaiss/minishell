@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/23 04:45:23 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 05:27:17 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	lexing_first_char(char character)
 	}
 	return (1);
 }
+
 int		lexing_last_char(char *command)
 {
 	int	size;
@@ -71,6 +72,7 @@ int		lexing_last_char(char *command)
 	}
 	return (1);
 }
+
 void	check_lexing_syntax(char *command)
 {
 	int		count;
@@ -80,7 +82,9 @@ void	check_lexing_syntax(char *command)
 	checker = 0;
 	if (!lexing_first_char(command[0]))
 		return ;
-	if (!lexing_last_char(command))
+	else if (!lexing_last_char(command))
+		return ;
+	else if (!check_quotes(command))
 		return ;
 	while (command[count])
 	{
@@ -96,6 +100,34 @@ void	check_lexing_syntax(char *command)
 		}
 		count++;
 	}
+}
+
+int		check_quotes(char *command)
+{
+	int		count;
+	char	*single_q;
+	char	*double_q;
+	
+	count = 0;
+	single_q = ft_strchr(command, '\'');
+	double_q = ft_strchr(command, '\"');
+	if (single_q)
+	{
+		if (!ft_strchr(single_q + 1, '\''))
+		{
+			printf("quotes error\n");
+			return (0);
+		}
+	}
+	else if (double_q)
+	{
+		if (!ft_strchr(double_q + 1, '\"'))
+		{
+			printf("quotes error\n");
+			return (0);
+		}
+	}
+	return (1);
 }
 
 void	put_lexing(char *command)
