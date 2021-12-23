@@ -6,7 +6,7 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/23 05:55:09 by abarchil         ###   ########.fr        #
+#    Updated: 2021/12/23 20:18:44 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC_FILE = main.c export.c src/ft_strjoin.c src/ft_memcmp.c src/ft_split.c \
 	src/ft_calloc.c src/ft_del_node.c src/ft_isalpha.c src/ft_memcpy.c src/ft_lstnew.c \
 	src/ft_memmove.c src/ft_memset.c src/ft_putstr_fd.c src/ft_putchar_fd.c src/ft_remchar.c \
 	src/ft_strdup.c src/ft_strlen.c src/ft_strtrim.c src/ft_substr.c src/get_next_line.c \
-	src/ft_bzero.c src/ft_lstadd_back.c lexing.c
+	src/ft_bzero.c src/ft_lstadd_back.c lexing.c parsing.c src/ft_strndup.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
@@ -41,7 +41,7 @@ all : $(NAME)
 			██║╚██╔╝██║██║██║╚████║██║ ╚═══██╗██╔══██║██╔══╝  ██║     ██║     \n\
 			██║ ╚═╝ ██║██║██║ ╚███║██║██████╔╝██║  ██║███████╗███████╗███████╗\n\
 			╚═╝     ╚═╝╚═╝╚═╝  ╚══╝╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ \n $(RESET)"
-	@echo "           		MADE WITH 🧡 BY : abarchil && fel-boua $(RED)"
+#	@echo "           		MADE WITH 💜 BY : abarchil & fel-boua $(RED)"
 %.o:%.c includes/minishell.h
 	@echo "$(CYAN)           		<----------- COMPILING $< -----------> $(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@

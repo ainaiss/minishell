@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/23 05:23:45 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:21:20 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ typedef struct t_export_variable
 	struct t_export_variable	*next;
 }	t_export;
 
+typedef struct s_words
+{
+	char			*words;
+	struct s_words	*next;
+}	t_words;
+
+typedef struct t_infiles_outfiles
+{
+	char						*inffile_path;
+	char						*outfile_path;
+	struct t_infiles_outfiles	*next;
+}	t_files;
+
 /******************************** libft *************************************************************/
 void		ft_bzero(void *s, size_t n);
 void		ft_lstadd_back(t_export *lst, t_export *new);
@@ -77,8 +90,10 @@ char   		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
+char		*ft_strndup(const char *s, int n);
+t_export	*ft_lstnew(void *content);
 /******************************** minishell *************************************************************/
-						
+
 						/******** builtins *******/
 
 void		ft_pwd(void);
@@ -100,11 +115,11 @@ int			check_quotes(char *command);
 
 void		check_command(char *command, char **env, t_export *export);
 void		environment_init(char **env, t_export *export);
-t_export	*ft_lstnew(void *content);
 void		parsing_export_command(char *command, t_export *export);
 void		print_export(t_export *export);
+void		parsing_word(char *command, t_words *cmds);
 
 						/******** temporary_functions *******/
-
+void	put_parse(t_words *words);
 void	put_lexing(char *command);
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/23 05:27:17 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/23 22:17:54 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,12 @@ int		lexing_last_char(char *command)
 {
 	int	size;
 
-	size = ft_strlen(command);
-	if (command[size] < 0 || command[size - 1 ] < 0)
+	size = ft_strlen(command) - 1;
+	while (command[size] == DELIMITER)
+		size--;
+	printf("%d", size);
+	printf("\n%c\n", command[size]);
+	if (command[size] < 0 && command[size] != DELIMITER)
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);
