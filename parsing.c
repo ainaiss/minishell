@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/23 23:10:05 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 08:51:35 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,32 @@ void	parsing_word(char *command, t_words *cmds)
 
 	count = 0;
 	last_index = count;
-	while(command[count] && command[count] != DELIMITER)
-		count++;
-	if (command[count - 1] > 0)
-		cmds->words = ft_strndup(command, count);
-	while (command[count] && command[count] == DELIMITER)
+	if (!command || command[0] == '\n')
+		return;
+	while(command[count] && command[count] != PIPE)
 		count++;
 	last_index = count;
+	while (command[count - 1] == ' ')
+		count--;
+	cmds->words = ft_strtrim(ft_strndup(command, count), " ");
+	if (!ft_strchr(command, PIPE))
+		return ;
+	count = last_index + 2;
 	while (command[count])
 	{
-		while (command[count] && command[count] != DELIMITER)
-			count++;
-		if (command[count - 1] > 0)
-			ft_lstadd_back_cmds(cmds, ft_lstnew_cmds(ft_substr(command, last_index, count - last_index)));
-		while (command[count] && command[count] == DELIMITER)
-			count++;
 		last_index = count;
+		while (command[count] && command[count] != PIPE)
+			count++;
+		ft_lstadd_back_cmds(cmds, ft_lstnew_cmds(ft_strtrim(ft_substr(command, last_index, count - last_index), " ")));
 		count++;
 	}
 }
 
 void	put_parse(t_words *words)
 {
-	while (words->next)
+	while (words)
 	{
 		puts(words->words);
 		words = words->next;
 	}
-	puts(words->words);
 }

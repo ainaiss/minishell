@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/23 22:17:54 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 00:18:05 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ char	*lexing(char *command)
 			command[count] = REDIRECTION_IN;
 		else if (command[count] == '$')
 			command[count] = DOLLAR_SIGNE;
-		else if (command[count] == ' ')
-			command[count] =  DELIMITER;
+		else if (command[count] == '\"')
+			command[count] = DOUBLE_QUOTES;
+		else if (command[count] == '\'')
+			command[count] = SINGLE_QUOTES;
 		count++;
 	}
 	return (command);
@@ -65,11 +67,9 @@ int		lexing_last_char(char *command)
 	int	size;
 
 	size = ft_strlen(command) - 1;
-	while (command[size] == DELIMITER)
+	while (command[size] == ' ')
 		size--;
-	printf("%d", size);
-	printf("\n%c\n", command[size]);
-	if (command[size] < 0 && command[size] != DELIMITER)
+	if (command[size] < 0 && command[size] != ' ')
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);
@@ -92,12 +92,12 @@ void	check_lexing_syntax(char *command)
 		return ;
 	while (command[count])
 	{
-		while (command[count] && command[count] != DELIMITER)
+		while (command[count] && command[count] != ' ')
 			count++;
 		checker = count - 1;
-		while (command[count] && command[count] == DELIMITER)
+		while (command[count] && command[count] == ' ')
 			count++;
-		if (command[checker] < 0 && command[count] < 0)
+		if (command[checker] < 0 && command[checker] > -8 && (command[count] < 0 && command[count] > -8))
 		{
 			printf("syntax error near unexpected token\n");
 			return ;
@@ -153,7 +153,9 @@ void	put_lexing(char *command)
 			puts("her_her_doc");
 		else if (command[count] == DOLLAR_SIGNE)
 			puts("her_dollar_signe");
-		else if (command[count] == DELIMITER)
-			puts("her_delimiter");
+		else if (command[count] == DOUBLE_QUOTES)
+			puts ("here_double_quotes");
+		else if (command[count] == SINGLE_QUOTES)
+			puts("here_single_quotes");
 	}
 }

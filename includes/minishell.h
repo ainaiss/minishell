@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/23 20:21:20 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 00:37:52 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@
 # define REDIRECTION_OUT_APPEND -4
 # define HER_DOC -5
 # define DOLLAR_SIGNE -6
-# define DELIMITER -7
+# define DOUBLE_QUOTES -8
+# define SINGLE_QUOTES -9
 
-typedef struct t_export_variable
+typedef struct t_export
 {
 	char						*variable;
 	int							print_exec;
-	struct t_export_variable	*next;
+	struct t_export				*next;
 }	t_export;
 
 typedef struct s_words
@@ -55,12 +56,19 @@ typedef struct s_words
 	struct s_words	*next;
 }	t_words;
 
-typedef struct t_infiles_outfiles
+typedef struct s_args
 {
-	char						*inffile_path;
-	char						*outfile_path;
-	struct t_infiles_outfiles	*next;
-}	t_files;
+	char			*args;
+	struct s_args	*next;
+}				t_args;
+
+typedef struct		s_cmd
+{
+	char				*command;
+	t_args				*args;
+	int					red_pipe;
+	struct s_cmd		*next;
+}					t_cmd;
 
 /******************************** libft *************************************************************/
 void		ft_bzero(void *s, size_t n);
@@ -92,6 +100,7 @@ void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
 char		*ft_strndup(const char *s, int n);
 t_export	*ft_lstnew(void *content);
+void		ft_clear_list(t_words *words);
 /******************************** minishell *************************************************************/
 
 						/******** builtins *******/
@@ -122,4 +131,5 @@ void		parsing_word(char *command, t_words *cmds);
 						/******** temporary_functions *******/
 void	put_parse(t_words *words);
 void	put_lexing(char *command);
+char	*parsing_double_quotes(char *command);
 #endif
