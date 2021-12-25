@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 13:37:40 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 23:33:18 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,14 @@ void	ft_clear_list_cmd(t_cmd *cmd)
 	int		index;
 	
 	index = -1;
-	//tmp = cmd->next;
-	while (cmd)
+	if (cmd->command)
 	{
-		tmp = cmd;
-		cmd = cmd->next;
-		free(tmp->command);
-		tmp->command = NULL;
-		// while (tmp->args[++index])
-		// {
-		// 	free(tmp->args[index]);
-		// 	tmp->args[index] = NULL;
-		// }
-		// free(tmp->args);
-		// tmp->args = NULL;
+		while (cmd)
+		{
+			tmp = cmd;
+			cmd = cmd->next;
+			free(tmp->command);
+			tmp->command = NULL;
+		}
 	}
-	free(cmd);
 }

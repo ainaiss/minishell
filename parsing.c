@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 22:07:05 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 23:31:14 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,4 @@ void	parse_commands(t_words *words, t_cmd *cmd)
 		index++;
 	cmd->command = ft_substr(words->words, 0, index);
 	puts(cmd->command);
-}
-
-void	put_words(t_words *words)
-{
-	while (words->next)
-	{
-		puts(words->words);
-		words = words->next;
-	}
-	puts(words->words);
-}
-
-void	put_parse(t_cmd *words)
-{
-	int count = -1;
-	while (words->next)
-	{
-		puts("==================command==================");
-		puts(words->command);
-		puts("==================Argemunt==================");
-		if (ft_strlen_2d(words->args))
-		{
-			while (words->args[++count])
-				puts(words->args[count]);
-		}
-		words = words->next;
-	}
-	puts("==================END==================");
 }
