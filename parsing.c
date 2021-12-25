@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 17:06:04 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:07:05 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parsing_word(char *command, t_words *cmds)
 	count = 0;
 	last_index = count;
 	if (!command || command[0] == '\n')
-		return;
+		return ;
 	while(command[count] && command[count] != PIPE)
 		count++;
 	last_index = count;
@@ -40,30 +40,42 @@ void	parsing_word(char *command, t_words *cmds)
 	}
 }
 
-// void	parse_commands(t_words *words, t_cmd *cmd)
-// {
-// 	int		count;
+void	parse_commands(t_words *words, t_cmd *cmd)
+{
+	int		index;
+	cmd = NULL;
+	index = 0;
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	while(words->words[index] && words->words[index] != ' ')
+		index++;
+	cmd->command = ft_substr(words->words, 0, index);
+	puts(cmd->command);
+}
 
-// 	count = 0;
-// 	while(words->words[count] != ' ' && words->words[count] > 0)
-// 		count++;
-// 	cmd = ft_lstnew(ft_substr(words->words, 0, count - 1);
-
-// }
+void	put_words(t_words *words)
+{
+	while (words->next)
+	{
+		puts(words->words);
+		words = words->next;
+	}
+	puts(words->words);
+}
 
 void	put_parse(t_cmd *words)
 {
-	int		count;
-
-	count = -1;
-	while (words)
+	int count = -1;
+	while (words->next)
 	{
 		puts("==================command==================");
 		puts(words->command);
 		puts("==================Argemunt==================");
-		while (words->args[++count])
-			puts(words->args[count]);
+		if (ft_strlen_2d(words->args))
+		{
+			while (words->args[++count])
+				puts(words->args[count]);
+		}
 		words = words->next;
 	}
-		puts("==================END==================");
+	puts("==================END==================");
 }

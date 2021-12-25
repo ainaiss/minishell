@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/25 16:33:49 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 20:38:16 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,5 @@ void	parse_commands(t_words *words, t_cmd *cmd);
 t_cmd	parse_commands_recursion(t_words *words);
 void	ft_clear_list_cmd(t_cmd *cmd);
 void	put_parse(t_cmd *words);
+void	put_words(t_words *words);
 #endif
