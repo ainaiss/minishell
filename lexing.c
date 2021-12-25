@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 00:18:05 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 13:46:57 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		lexing_last_char(char *command)
 	size = ft_strlen(command) - 1;
 	while (command[size] == ' ')
 		size--;
-	if (command[size] < 0 && command[size] != ' ')
+	if (command[size] < 0 && command[size] != ' ' && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);
@@ -88,7 +88,7 @@ void	check_lexing_syntax(char *command)
 		return ;
 	else if (!lexing_last_char(command))
 		return ;
-	else if (!check_quotes(command))
+	else if (check_quotes(command) == 0)
 		return ;
 	while (command[count])
 	{
@@ -113,11 +113,11 @@ int		check_quotes(char *command)
 	char	*double_q;
 	
 	count = 0;
-	single_q = ft_strchr(command, '\'');
-	double_q = ft_strchr(command, '\"');
+	single_q = ft_strchr(command, SINGLE_QUOTES);
+	double_q = ft_strchr(command, DOUBLE_QUOTES);
 	if (single_q)
 	{
-		if (!ft_strchr(single_q + 1, '\''))
+		if (!ft_strchr(single_q + 1, SINGLE_QUOTES))
 		{
 			printf("quotes error\n");
 			return (0);
@@ -125,7 +125,7 @@ int		check_quotes(char *command)
 	}
 	else if (double_q)
 	{
-		if (!ft_strchr(double_q + 1, '\"'))
+		if (!ft_strchr(double_q + 1, DOUBLE_QUOTES))
 		{
 			printf("quotes error\n");
 			return (0);

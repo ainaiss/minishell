@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/25 00:37:52 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 16:33:49 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,20 @@ typedef struct s_words
 	struct s_words	*next;
 }	t_words;
 
-typedef struct s_args
-{
-	char			*args;
-	struct s_args	*next;
-}				t_args;
 
 typedef struct		s_cmd
 {
 	char				*command;
-	t_args				*args;
+	char				**args;
 	int					red_pipe;
 	struct s_cmd		*next;
 }					t_cmd;
 
-/******************************** libft *************************************************************/
+/************************************** libft *******************************************************/
+
 void		ft_bzero(void *s, size_t n);
-void		ft_lstadd_back(t_export *lst, t_export *new);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
-void		ft_del_node(t_export *lst, char *content);
-t_export	*ft_lstnew(void *content);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
@@ -87,20 +80,28 @@ char		**ft_split(char const *s, char c);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char const *s1, char const *s2);
 int			ft_strlen(const char *s);
+int			ft_strlen_2d(char **s);
 char		*get_next_line(int fd);
 int			ft_strcmp(const char *s1, const char *s2);
-t_export	*ft_lstlast(t_export *lst);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strtrim(char const *s1, char const *set);
-void		ft_lstadd_back(t_export *lst, t_export *new);
 int			ft_strchr_index(char *s, int c);
 char   		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
 char		*ft_strndup(const char *s, int n);
+
+			/****** linked list *********/
+
+t_words		*ft_lstnew_words(void *content);
 t_export	*ft_lstnew(void *content);
+t_cmd		*ft_lstnew_cmd(void *content);
+void		ft_del_node(t_export *lst, char *content);
 void		ft_clear_list(t_words *words);
+void		ft_lstadd_back(t_export *lst, t_export *new);
+void		ft_lstadd_back_cmd(t_cmd *lst, t_cmd *new);
+void	ft_lstadd_back_words(t_words *lst, t_words *new);
 /******************************** minishell *************************************************************/
 
 						/******** builtins *******/
@@ -129,7 +130,12 @@ void		print_export(t_export *export);
 void		parsing_word(char *command, t_words *cmds);
 
 						/******** temporary_functions *******/
-void	put_parse(t_words *words);
+
+//void	put_parse(t_words *words);
 void	put_lexing(char *command);
 char	*parsing_double_quotes(char *command);
+void	parse_commands(t_words *words, t_cmd *cmd);
+t_cmd	parse_commands_recursion(t_words *words);
+void	ft_clear_list_cmd(t_cmd *cmd);
+void	put_parse(t_cmd *words);
 #endif

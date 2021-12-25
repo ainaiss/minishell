@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 09:03:51 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/25 13:37:40 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,28 @@ void	ft_clear_list(t_words *words)
 		tmp->words = NULL;
 		tmp->next = NULL;
 	}
+}
+
+void	ft_clear_list_cmd(t_cmd *cmd)
+{
+	t_cmd 	*tmp;
+	int		index;
+	
+	index = -1;
+	//tmp = cmd->next;
+	while (cmd)
+	{
+		tmp = cmd;
+		cmd = cmd->next;
+		free(tmp->command);
+		tmp->command = NULL;
+		// while (tmp->args[++index])
+		// {
+		// 	free(tmp->args[index]);
+		// 	tmp->args[index] = NULL;
+		// }
+		// free(tmp->args);
+		// tmp->args = NULL;
+	}
+	free(cmd);
 }
