@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/25 23:31:36 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:47:20 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,29 @@ void	check_command(char *command, char **env, t_export *export)
 int	main(int argc, char **argv, char **env)
 {
 	t_export	export;
-	char		*command;
 	t_words		words;
 	t_cmd		cmd;
+	char		*command;
+	int			*lampe;
+
+	cmd.next = NULL;
+	cmd.args = NULL;
 	words.next = NULL;
 	argc--;
 	(void)argv;
+	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
 	while (TRUE)
 	{
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
-		command = lexing(command);
+		command = lexing(command, &lampe);
 		check_lexing_syntax(command);
 		parsing_word(command, &words);
-		parse_commands(&words, &cmd);
+		parsing(&words, &cmd);
 		ft_clear_list(&words);
 		ft_clear_list_cmd(&cmd);
-		check_command(command, env, &export);
+		// check_command(command, env, &export);
 		free(command);
 	}
 	return (0);

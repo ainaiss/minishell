@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/25 20:38:16 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:16:19 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define REDIRECTION_OUT_APPEND -4
 # define HER_DOC -5
 # define DOLLAR_SIGNE -6
+# define SPACE -7
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
 
@@ -56,12 +57,20 @@ typedef struct s_words
 	struct s_words	*next;
 }	t_words;
 
+typedef struct s_files
+{
+	int				type;
+	char			*filename;
+	struct s_files	*next;
+
+}	t_files;
 
 typedef struct		s_cmd
 {
 	char				*command;
-	char				**args;
 	int					red_pipe;
+	char				**args;
+	t_files				*files;
 	struct s_cmd		*next;
 }					t_cmd;
 
@@ -96,7 +105,8 @@ char		*ft_strndup(const char *s, int n);
 
 t_words		*ft_lstnew_words(void *content);
 t_export	*ft_lstnew(void *content);
-t_cmd		*ft_lstnew_cmd(void *content);
+t_files		*ft_lstnew_files(void *content);
+t_cmd		*ft_lstnew_cmd(char **content);
 void		ft_del_node(t_export *lst, char *content);
 void		ft_clear_list(t_words *words);
 void		ft_lstadd_back(t_export *lst, t_export *new);
@@ -115,7 +125,7 @@ void		env_command(t_export *export);
 
 						/********** lixing **********/
 
-char		*lexing(char *command);
+char		*lexing(char *command, int **lampe);
 void		check_lexing_syntax(char *command);
 int			lexing_first_char(char character);
 int			lexing_last_char(char *command);
@@ -130,13 +140,15 @@ void		print_export(t_export *export);
 void		parsing_word(char *command, t_words *cmds);
 
 						/******** temporary_functions *******/
-
-//void	put_parse(t_words *words);
 void	put_lexing(char *command);
 char	*parsing_double_quotes(char *command);
-void	parse_commands(t_words *words, t_cmd *cmd);
+
+
+t_cmd	*parse_commands(t_words *words, t_cmd *cmd);
+void	parsing(t_words *words, t_cmd *cmd);
+
+
 t_cmd	parse_commands_recursion(t_words *words);
 void	ft_clear_list_cmd(t_cmd *cmd);
-void	put_parse(t_cmd *words);
-void	put_words(t_words *words);
+void	put_parse(t_cmd *cmd);
 #endif

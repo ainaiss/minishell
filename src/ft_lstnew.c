@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 13:17:29 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 11:09:36 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:16:02 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,25 @@ t_words	*ft_lstnew_words(void *content)
 	return (new);
 }
 
-t_cmd	*ft_lstnew_cmd(void *content)
+t_cmd	*ft_lstnew_cmd(char **content)
 {
 	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->command = content;
+	new->args = content;
+	new->next = NULL;
+	return (new);
+}
+t_files	*ft_lstnew_files(void *content)
+{
+	t_files		*new;
+
+	new = (t_files *)malloc(sizeof(t_files ));
+	if (!new)
+		return (NULL);
+	new->filename = content;
 	new->next = NULL;
 	return (new);
 }

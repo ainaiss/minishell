@@ -6,42 +6,56 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 13:46:57 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/26 21:36:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-char	*lexing(char *command)
+char	*lexing(char *command, int **lampe)
 {
 	int	count;
-
+	
 	count = 0;
 	while (command[count])
 	{
-		if (command[count] == '|')
+		if (command[count] == '|' && !lampe[0][1] && !lampe[0][2])
 			command[count] = PIPE;
-		else if (command[count] == '>' && command[count + 1] == '>')
+		if (command[count] == '>' && command[count + 1] == '>' && !lampe[0][1] && !lampe[0][2])
 		{
 			command[count] = REDIRECTION_OUT_APPEND;
 			command[count + 1] = REDIRECTION_OUT_APPEND;
 			count += 2;
 		}
-		else if (command[count] == '<' && command[count + 1] == '<')
+		if (command[count] == '<' && command[count + 1] == '<' && !lampe[0][1] && !lampe[0][2])
 		{
 			command[count] = HER_DOC;
 			command[count + 1] = HER_DOC;
 			count += 2;
 		}
-		else if (command[count] == '>')
+		if (command[count] == '>' && !lampe[0][1] && !lampe[0][2])
 			command[count] = REDIRECTION_OUT;
-		else if (command[count] == '<')
+		if (command[count] == '<' && !lampe[0][1] && !lampe[0][2])
 			command[count] = REDIRECTION_IN;
-		else if (command[count] == '$')
+		if (command[count] == '$')
 			command[count] = DOLLAR_SIGNE;
-		else if (command[count] == '\"')
+		if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
+			command[count] = SPACE;
+		if (command[count] == '\"')
+		{
+			if (lampe[0][2] == 1)
+				lampe[0][2] = 0;
+			else
+				lampe[0][2] = 1;
 			command[count] = DOUBLE_QUOTES;
-		else if (command[count] == '\'')
+		}
+		if (command[count] == '\'')
+		{
+			if (lampe[0][1] == 1)
+				lampe[0][1] = 0;
+			else
+				lampe[0][1] = 1;
 			command[count] = SINGLE_QUOTES;
+		}
 		count++;
 	}
 	return (command);
@@ -69,7 +83,7 @@ int		lexing_last_char(char *command)
 	size = ft_strlen(command) - 1;
 	while (command[size] == ' ')
 		size--;
-	if (command[size] < 0 && command[size] != ' ' && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
+	if (command[size] < 0 && command[size] != SPACE && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);
@@ -157,5 +171,7 @@ void	put_lexing(char *command)
 			puts ("here_double_quotes");
 		else if (command[count] == SINGLE_QUOTES)
 			puts("here_single_quotes");
+		else if (command[count] == SPACE)
+			puts("here_delimiter");
 	}
 }
