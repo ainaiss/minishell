@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/27 18:47:20 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:02:15 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ int	main(int argc, char **argv, char **env)
 	{
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
+		if (!command[0])
+			continue;
 		command = lexing(command, &lampe);
 		check_lexing_syntax(command);
 		parsing_word(command, &words);
 		parsing(&words, &cmd);
-		ft_clear_list(&words);
-		ft_clear_list_cmd(&cmd);
+		//ft_clear_list(&words);
+	//	ft_clear_list_cmd(&cmd);
 		// check_command(command, env, &export);
 		free(command);
 	}

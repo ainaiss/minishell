@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/27 20:22:02 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/28 18:59:14 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,3 @@ void	parsing(t_words *words, t_cmd *cmd)
 	}
 	ft_lstadd_back_cmd(cmd, parse_commands(words, cmd));
 }
-
-// void	ft_check_file(t_cmd *cmd, t_files *file)
-// {
-// }
