@@ -6,7 +6,7 @@
 /*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/28 18:59:14 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:10:08 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,13 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 	return (cmd);
 }
 
-void	parsing(t_words *words, t_cmd *cmd)
+t_cmd	*parsing(t_words *words, t_cmd *cmd)
 {
-	while (words->next)
+	while (words)
 	{
 		ft_lstadd_back_cmd(cmd, parse_commands(words, cmd));
 		words = words->next;
 	}
-	ft_lstadd_back_cmd(cmd, parse_commands(words, cmd));
+	// ft_lstadd_back_cmd(cmd, parse_commands(words, cmd));
+	return (cmd);
 }

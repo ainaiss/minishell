@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/27 18:16:19 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/28 19:04:52 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,7 @@ char	*parsing_double_quotes(char *command);
 
 
 t_cmd	*parse_commands(t_words *words, t_cmd *cmd);
-void	parsing(t_words *words, t_cmd *cmd);
-
+t_cmd	*parsing(t_words *words, t_cmd *cmd);
 
 t_cmd	parse_commands_recursion(t_words *words);
 void	ft_clear_list_cmd(t_cmd *cmd);
