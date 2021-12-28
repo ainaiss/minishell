@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/28 22:25:35 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:33:57 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
-		printf("i %d\n", i);
 		if (cmd->args[i][0] == REDIRECTION_IN)
 			cmd->red_pipe = 2;
 		else if (cmd->args[i][0] == REDIRECTION_OUT)
@@ -75,7 +74,6 @@ t_cmd	*parsing(t_words *words, t_cmd *cmd)
 {
 	while (words)
 	{
-		printf("'%s'\n", words->words);
 		ft_lstadd_back_cmd(&cmd, parse_commands(words, cmd));
 		words = words->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/28 22:04:36 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/29 00:22:28 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void		env_command(t_export *export);
 
 char		*lexing(char *command, int **lampe);
 void		check_lexing_syntax(char *command);
-int			lexing_first_char(char character);
+int			lexing_first_char(char *command);
 int			lexing_last_char(char *command);
 int			check_quotes(char *command);
 

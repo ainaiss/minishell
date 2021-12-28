@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/28 22:27:25 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/29 00:12:44 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv, char **env)
 	char		*command;
 	int			*lampe;
 
-	argc--;
+	//int i = -1;
+	(void)argc;
 	(void)argv;
 	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
@@ -59,16 +60,24 @@ int	main(int argc, char **argv, char **env)
 		if (!command[0])
 			continue;
 		command = lexing(command, &lampe);
+		puts("====== lesxing =======");
+		put_lexing(command);
+		puts(command);
 		check_lexing_syntax(command);
+		puts("====== parsing ========");
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
-		// command -> node 1
-		puts(cmd->command);
-		// command -> node 2
-		//puts(cmd->next->command);		
+		// while (cmd)
+		// {
+		// 	puts(cmd->command);	
+		// 	while (cmd->args[++i])
+		// 		puts(cmd->args[i]);
+		// 	if (!cmd->next)
+		// 		break;
+		// 	cmd = cmd->next;
+		// }
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
-		// check_command(command, env, &export);
 		free(command);
 	}
 	return (0);

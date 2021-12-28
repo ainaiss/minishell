@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/26 21:36:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/29 00:29:02 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ char	*lexing(char *command, int **lampe)
 			command[count] = REDIRECTION_OUT;
 		if (command[count] == '<' && !lampe[0][1] && !lampe[0][2])
 			command[count] = REDIRECTION_IN;
-		if (command[count] == '$')
+		if ((command[count] == '$' && !lampe[0][1]) || (command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
 			command[count] = DOLLAR_SIGNE;
+
 		if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
 			command[count] = SPACE;
 		if (command[count] == '\"')
@@ -61,14 +62,14 @@ char	*lexing(char *command, int **lampe)
 	return (command);
 }
 
-int	lexing_first_char(char character)
+int	lexing_first_char(char *command)
 {
-	if (character == PIPE)
+	if (command[0] == PIPE)
 	{
 		printf("syntax error near unexpected token `|'\n");
 		return (0);
 	}
-	else if (character < 0)
+	else if (command[0] < 0 && ft_strlen(command) == 1)
 	{
 		printf("syntax error near unexpected token `newline'\n");
 		return (0);
@@ -81,7 +82,7 @@ int		lexing_last_char(char *command)
 	int	size;
 
 	size = ft_strlen(command) - 1;
-	while (command[size] == ' ')
+	while (command[size] == SPACE)
 		size--;
 	if (command[size] < 0 && command[size] != SPACE && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
 	{
@@ -98,9 +99,7 @@ void	check_lexing_syntax(char *command)
 	
 	count = 0;
 	checker = 0;
-	if (!lexing_first_char(command[0]))
-		return ;
-	else if (!lexing_last_char(command))
+	if (!lexing_first_char(command))
 		return ;
 	else if (check_quotes(command) == 0)
 		return ;
@@ -118,6 +117,8 @@ void	check_lexing_syntax(char *command)
 		}
 		count++;
 	}
+	if (!lexing_last_char(command))
+		return ;
 }
 
 int		check_quotes(char *command)
@@ -133,7 +134,7 @@ int		check_quotes(char *command)
 	{
 		if (!ft_strchr(single_q + 1, SINGLE_QUOTES))
 		{
-			printf("quotes error\n");
+			printf("quotes error!\n");
 			return (0);
 		}
 	}
@@ -141,7 +142,7 @@ int		check_quotes(char *command)
 	{
 		if (!ft_strchr(double_q + 1, DOUBLE_QUOTES))
 		{
-			printf("quotes error\n");
+			printf("quotes error!\n");
 			return (0);
 		}
 	}
