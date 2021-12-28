@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
+#    By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/24 20:05:07 by abarchil         ###   ########.fr        #
+#    Updated: 2021/12/28 22:08:08 by fel-boua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CYAN = \033[0;36m
 
 YELLOW = \033[0;33m
 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -ggdb
 
 all : $(NAME)
 	@echo "$(RED) \

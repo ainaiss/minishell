@@ -8,10 +8,22 @@
 			"name": "(lldb) Attach",
 			"type": "cppdbg",
 			"request": "attach",
-			"program": "/Users/abarchil/Desktop/minishell/minishell",
-			"processId": "17025",
+			"program": "${workspaceFolder}/minishell",
+			"processId": "${command:pickProcess}",
 			"MIMode": "lldb"
 		},
+		// {
+		// 	"name": "(lldb) Launch",
+		// 	"type": "cppdbg",
+		// 	"request": "launch",
+		// 	"program": "${workspaceFolder}/minishell",
+		// 	"args": [],
+		// 	"stopAtEntry": false,
+		// 	"cwd": "${fileDirname}",
+		// 	"environment": [],
+		// 	"externalConsole": false,
+		// 	"MIMode": "lldb"
+		// },
 		// {
 		// 	"name": "gcc - Build and debug active file",
 		// 	"type": "cppdbg",
@@ -25,5 +37,6 @@
 		// 	"MIMode": "lldb",
 		// 	// "preLaunchTask": "C/C++: gcc build active file"
 		// }
+
 	]
 }

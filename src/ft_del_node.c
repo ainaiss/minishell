@@ -6,7 +6,7 @@
 /*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/25 23:33:18 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:16:59 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ void	ft_del_node(t_export *lst, char *content)
 		}
 		lst = lst->next;
 	}
+}
+
+void	ft_del_node_cmd(t_cmd *lst)
+{
+	t_cmd *tmp;
+	tmp = lst->next;
+	if (!tmp->command)
+	{
+		lst->next = lst->next->next;
+		free(tmp->command);
+		free(tmp);
+		tmp->next = NULL;
+		tmp = NULL;
+		return ;
+	}
+	lst = lst->next;
 }
 
 void	ft_clear_list(t_words *words)
@@ -56,6 +72,7 @@ void	ft_clear_list_cmd(t_cmd *cmd)
 	{
 		while (cmd)
 		{
+			index++;
 			tmp = cmd;
 			cmd = cmd->next;
 			free(tmp->command);

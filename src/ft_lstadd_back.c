@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:36:07 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/27 18:39:45 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:25:41 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	ft_lstadd_back(t_export *lst, t_export *new)
 	}
 }
 
-void	ft_lstadd_back_cmd(t_cmd *lst, t_cmd *new)
+void	ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new)
 {
 	t_cmd	*tmp;
 
-	tmp = lst;
-	if (lst == NULL)
+	tmp = *lst;
+	if (*lst == NULL)
 	{
-		lst = new;
+		*lst = new;
 		return ;
 	}
 	else

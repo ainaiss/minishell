@@ -6,7 +6,7 @@
 /*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/28 19:12:32 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:27:25 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,17 @@ int	main(int argc, char **argv, char **env)
 {
 	t_export	export;
 	t_words		words;
-	t_cmd		cmd;
+	t_cmd		*cmd;
 	char		*command;
 	int			*lampe;
 
-	cmd.next = NULL;
-	cmd.args = NULL;
-	words.next = NULL;
 	argc--;
 	(void)argv;
 	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
 	while (TRUE)
 	{
+		cmd = NULL;
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
 		if (!command[0])
@@ -63,13 +61,13 @@ int	main(int argc, char **argv, char **env)
 		command = lexing(command, &lampe);
 		check_lexing_syntax(command);
 		parsing_word(command, &words);
-		cmd = *parsing(&words, &cmd);
+		cmd = parsing(&words, cmd);
 		// command -> node 1
-		puts(cmd.command);
+		puts(cmd->command);
 		// command -> node 2
-		puts(cmd.next->command);		
+		//puts(cmd->next->command);		
 		ft_clear_list(&words);
-		ft_clear_list_cmd(&cmd);
+		ft_clear_list_cmd(cmd);
 		// check_command(command, env, &export);
 		free(command);
 	}

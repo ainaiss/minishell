@@ -6,7 +6,7 @@
 /*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/28 19:04:52 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:04:36 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,9 @@ t_cmd		*ft_lstnew_cmd(char **content);
 void		ft_del_node(t_export *lst, char *content);
 void		ft_clear_list(t_words *words);
 void		ft_lstadd_back(t_export *lst, t_export *new);
-void		ft_lstadd_back_cmd(t_cmd *lst, t_cmd *new);
-void	ft_lstadd_back_words(t_words *lst, t_words *new);
+void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
+void		ft_lstadd_back_words(t_words *lst, t_words *new);
+void		ft_del_node_cmd(t_cmd *lst);
 /******************************** minishell *************************************************************/
 
 						/******** builtins *******/
