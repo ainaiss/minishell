@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/29 00:29:02 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/29 00:50:46 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 char	*lexing(char *command, int **lampe)
 {
 	int	count;
-	
+
 	count = 0;
 	while (command[count])
 	{
@@ -38,7 +38,6 @@ char	*lexing(char *command, int **lampe)
 			command[count] = REDIRECTION_IN;
 		if ((command[count] == '$' && !lampe[0][1]) || (command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
 			command[count] = DOLLAR_SIGNE;
-
 		if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
 			command[count] = SPACE;
 		if (command[count] == '\"')

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/29 00:22:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/29 12:25:18 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_del_node_cmd(t_cmd *lst);
+void		ft_clear_list_cmd(t_cmd *cmd);
 /******************************** minishell *************************************************************/
 
 						/******** builtins *******/
@@ -139,16 +140,13 @@ void		environment_init(char **env, t_export *export);
 void		parsing_export_command(char *command, t_export *export);
 void		print_export(t_export *export);
 void		parsing_word(char *command, t_words *cmds);
+t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
+t_cmd		*parsing(t_words *words, t_cmd *cmd);
+void		parse_dollar_signe(t_cmd *cmd, t_export *export);
+char		*get_var(char *var, t_export *export);
+char		*get_var_value(char *variable);
 
 						/******** temporary_functions *******/
+
 void	put_lexing(char *command);
-char	*parsing_double_quotes(char *command);
-
-
-t_cmd	*parse_commands(t_words *words, t_cmd *cmd);
-t_cmd	*parsing(t_words *words, t_cmd *cmd);
-
-t_cmd	parse_commands_recursion(t_words *words);
-void	ft_clear_list_cmd(t_cmd *cmd);
-void	put_parse(t_cmd *cmd);
 #endif
