@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/29 00:50:46 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 01:03:42 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,29 @@ char	*lexing(char *command, int **lampe)
 	{
 		if (command[count] == '|' && !lampe[0][1] && !lampe[0][2])
 			command[count] = PIPE;
-		if (command[count] == '>' && command[count + 1] == '>' && !lampe[0][1] && !lampe[0][2])
+		else if (command[count] == '>' && command[count + 1] == '>' && !lampe[0][1] && !lampe[0][2])
 		{
 			command[count] = REDIRECTION_OUT_APPEND;
 			command[count + 1] = REDIRECTION_OUT_APPEND;
-			count += 2;
+			count++;
 		}
-		if (command[count] == '<' && command[count + 1] == '<' && !lampe[0][1] && !lampe[0][2])
+		else if (command[count] == '<' && command[count + 1] == '<' && !lampe[0][1] && !lampe[0][2])
 		{
 			command[count] = HER_DOC;
 			command[count + 1] = HER_DOC;
-			count += 2;
+			count++;
 		}
-		if (command[count] == '>' && !lampe[0][1] && !lampe[0][2])
+		else if (command[count] == '>' && !lampe[0][1] && !lampe[0][2])
 			command[count] = REDIRECTION_OUT;
-		if (command[count] == '<' && !lampe[0][1] && !lampe[0][2])
+		else if (command[count] == '<' && !lampe[0][1] && !lampe[0][2])
 			command[count] = REDIRECTION_IN;
-		if ((command[count] == '$' && !lampe[0][1]) || (command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
+		else if ((command[count] == '$' && !lampe[0][1]) || (command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
 			command[count] = DOLLAR_SIGNE;
-		if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
+		else if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
 			command[count] = SPACE;
-		if (command[count] == '\"')
+		else if ((command[count] == '\\' && !lampe[0][1]) || (command[count] == '\\' && !lampe[0][1] && !lampe[0][2]))
+			command[count] = BACK_SLASH;
+		else if (command[count] == '\"')
 		{
 			if (lampe[0][2] == 1)
 				lampe[0][2] = 0;
@@ -48,7 +50,7 @@ char	*lexing(char *command, int **lampe)
 				lampe[0][2] = 1;
 			command[count] = DOUBLE_QUOTES;
 		}
-		if (command[count] == '\'')
+		else if (command[count] == '\'')
 		{
 			if (lampe[0][1] == 1)
 				lampe[0][1] = 0;
@@ -123,55 +125,20 @@ void	check_lexing_syntax(char *command)
 int		check_quotes(char *command)
 {
 	int		count;
-	char	*single_q;
-	char	*double_q;
+	int		quotes_num;
 	
 	count = 0;
-	single_q = ft_strchr(command, SINGLE_QUOTES);
-	double_q = ft_strchr(command, DOUBLE_QUOTES);
-	if (single_q)
+	quotes_num = 0;
+	while (command[count])
 	{
-		if (!ft_strchr(single_q + 1, SINGLE_QUOTES))
-		{
-			printf("quotes error!\n");
-			return (0);
-		}
+		if (command[count] == DOUBLE_QUOTES || command[count] == SINGLE_QUOTES)
+			quotes_num++;
+		count++;
 	}
-	else if (double_q)
+	if ((quotes_num % 2 ) == 1)
 	{
-		if (!ft_strchr(double_q + 1, DOUBLE_QUOTES))
-		{
-			printf("quotes error!\n");
-			return (0);
-		}
+		printf("quotes error!\n");
+		return (0);
 	}
 	return (1);
-}
-
-void	put_lexing(char *command)
-{
-	int	count;
-
-	count = -1;
-	while (command[++count])
-	{
-		if (command[count] == PIPE)
-			puts("her_pipe");
-		else if (command[count] == REDIRECTION_OUT)
-			puts("her_red_out");
-		else if (command[count] == REDIRECTION_IN)
-			puts("her_red_in");
-		else if (command[count] == REDIRECTION_OUT_APPEND && command[count + 1] == REDIRECTION_OUT_APPEND)
-			puts("her_red_out_app");
-		else if (command[count] == HER_DOC && command[count + 1] == HER_DOC)
-			puts("her_her_doc");
-		else if (command[count] == DOLLAR_SIGNE)
-			puts("her_dollar_signe");
-		else if (command[count] == DOUBLE_QUOTES)
-			puts ("here_double_quotes");
-		else if (command[count] == SINGLE_QUOTES)
-			puts("here_single_quotes");
-		else if (command[count] == SPACE)
-			puts("here_delimiter");
-	}
 }

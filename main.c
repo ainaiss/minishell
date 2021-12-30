@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/29 02:08:34 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 01:03:59 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	check_command(char *command, char **env, t_export *export)
 		ft_unset(command, export);
 	else if (!ft_memcmp(command, "echo", 4))
 		ft_echo(command, export);
-	// else
-	// 	printf("minishell : command not found\n");
 }
 
 int	main(int argc, char **argv, char **env)
@@ -47,7 +45,6 @@ int	main(int argc, char **argv, char **env)
 	char		*command;
 	int			*lampe;
 
-	//int i = -1;
 	(void)argc;
 	(void)argv;
 	lampe = ft_calloc(2, 4);
@@ -64,15 +61,6 @@ int	main(int argc, char **argv, char **env)
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
 		parse_dollar_signe(cmd, &export);
-		// while (cmd)
-		// {
-		// 	puts(cmd->command);	
-		// 	while (cmd->args[++i])
-		// 		puts(cmd->args[i]);
-		// 	if (!cmd->next)
-		// 		break;
-		// 	cmd = cmd->next;
-		// }
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
 		free(command);

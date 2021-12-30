@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/29 12:25:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:55:56 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define SPACE -7
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
+# define BACK_SLASH -10
 
 typedef struct t_export
 {
@@ -112,6 +113,7 @@ void		ft_clear_list(t_words *words);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
+void		ft_lstadd_back_file(t_files **lst, t_files *new);
 void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list_cmd(t_cmd *cmd);
 /******************************** minishell *************************************************************/
@@ -146,7 +148,7 @@ void		parse_dollar_signe(t_cmd *cmd, t_export *export);
 char		*get_var(char *var, t_export *export);
 char		*get_var_value(char *variable);
 
-						/******** temporary_functions *******/
+					/******** temporary_functions *******/
 
 void	put_lexing(char *command);
 #endif

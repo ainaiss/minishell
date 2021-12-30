@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:36:07 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/28 22:25:41 by fel-boua         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:55:52 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,24 @@ void	ft_lstadd_back_words(t_words *lst, t_words *new)
 			tmp = tmp->next;
 		tmp->next = new;
 		tmp = NULL;
+	}
+}
+
+void	ft_lstadd_back_file(t_files **lst, t_files *new)
+{
+	t_files	*tmp;
+
+	tmp = *lst;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		new->next = NULL;
+		tmp->next= new;
 	}
 }
