@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/29 22:55:56 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 16:21:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct		s_cmd
 	struct s_cmd		*next;
 }					t_cmd;
 
-/************************************** libft *******************************************************/
+/************************************** SOURCES *******************************************************/
 
 void		ft_bzero(void *s, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
@@ -101,8 +101,9 @@ int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
 char		*ft_strndup(const char *s, int n);
+void		ft_free_2d(char **av);
 
-			/****** linked list *********/
+					/****** linked list *********/
 
 t_words		*ft_lstnew_words(void *content);
 t_export	*ft_lstnew(void *content);
@@ -116,6 +117,7 @@ void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
 void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list_cmd(t_cmd *cmd);
+
 /******************************** minishell *************************************************************/
 
 						/******** builtins *******/
@@ -130,7 +132,8 @@ void		env_command(t_export *export);
 						/********** lixing **********/
 
 char		*lexing(char *command, int **lampe);
-void		check_lexing_syntax(char *command);
+int			check_lexing_syntax(char *command);
+int			checke_near_token(char *command);
 int			lexing_first_char(char *command);
 int			lexing_last_char(char *command);
 int			check_quotes(char *command);
@@ -147,6 +150,7 @@ t_cmd		*parsing(t_words *words, t_cmd *cmd);
 void		parse_dollar_signe(t_cmd *cmd, t_export *export);
 char		*get_var(char *var, t_export *export);
 char		*get_var_value(char *variable);
+char		**delete_array(char **av);
 
 					/******** temporary_functions *******/
 

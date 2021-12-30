@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 01:03:42 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 16:26:34 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		lexing_last_char(char *command)
 	return (1);
 }
 
-void	check_lexing_syntax(char *command)
+int		check_lexing_syntax(char *command)
 {
 	int		count;
 	int		checker;
@@ -101,9 +101,11 @@ void	check_lexing_syntax(char *command)
 	count = 0;
 	checker = 0;
 	if (!lexing_first_char(command))
-		return ;
+		return (-1);
 	else if (check_quotes(command) == 0)
-		return ;
+		return (-1);
+	else if (checke_near_token(command) == -1)
+		return (-1);
 	while (command[count])
 	{
 		while (command[count] && command[count] != ' ')
@@ -114,12 +116,30 @@ void	check_lexing_syntax(char *command)
 		if (command[checker] < 0 && command[checker] > -8 && (command[count] < 0 && command[count] > -8))
 		{
 			printf("syntax error near unexpected token\n");
-			return ;
+			return (-1);
 		}
 		count++;
 	}
 	if (!lexing_last_char(command))
-		return ;
+		return (-1);
+	return (0);
+}
+
+int		checke_near_token(char *command)
+{
+	int		index;
+
+	index = 0;
+	while (command[index])
+	{
+		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE) && command[index + 1] > 0)
+		{
+			printf("syntax error Space not found\n");
+			return (-1);
+		}
+		index++;	
+	}
+	return (0);
 }
 
 int		check_quotes(char *command)

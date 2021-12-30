@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/30 01:03:59 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 15:56:09 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	main(int argc, char **argv, char **env)
 		if (!command[0])
 			continue;
 		command = lexing(command, &lampe);
-		check_lexing_syntax(command);
+		if (check_lexing_syntax(command) == -1)
+			continue;
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
 		parse_dollar_signe(cmd, &export);

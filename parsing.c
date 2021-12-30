@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 01:05:14 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 16:26:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parsing_word(char *command, t_words *cmds)
 t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 {
 	int	i;
-
+	
 	i = -1;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
@@ -67,6 +67,7 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 				cmd->files->type = 3;
 		}
 	}
+	cmd->args = delete_array(cmd->args);
 	return (cmd);
 }
 
@@ -78,4 +79,33 @@ t_cmd	*parsing(t_words *words, t_cmd *cmd)
 		words = words->next;
 	}
 	return (cmd);
+}
+
+char	**delete_array(char **av)
+{
+	int		index;
+	int		tmp_av_index;
+	char	**tmp_av;
+	
+	index = 0;
+	tmp_av_index = 0;
+	tmp_av = (char **)malloc(sizeof(char *) * ft_strlen_2d(av) - 1);
+	if (!tmp_av)
+		return (NULL);
+	while (av[index])
+	{
+		if (av[index][0] < 0 && av[index + 2])
+			index += 2;
+		else if (av[index][0] < 0 && !av[index + 2])
+			break ;
+		else
+		{
+			tmp_av[tmp_av_index] = ft_strdup(av[index]);
+			tmp_av_index++;
+			index++;
+		}
+	}
+	tmp_av[tmp_av_index] = NULL;
+//	ft_free_2d(av);
+	return (tmp_av);
 }
