@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 16:26:07 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:32:33 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parsing_word(char *command, t_words *cmds)
 t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 {
 	int	i;
-	
+
 	i = -1;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
@@ -53,7 +53,7 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 	cmd->args =  ft_split(words->words, SPACE);
 	if (cmd->args[0][0] > 0)
 		cmd->command = ft_strdup(cmd->args[0]);
-	else if (cmd->args[0][0] < 0 && ft_strlen(words->words) > 1)
+	else if ((cmd->args[0][0] < 0 && cmd->args[0][0] != SPACE) && ft_strlen(words->words) > 1)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
@@ -106,6 +106,6 @@ char	**delete_array(char **av)
 		}
 	}
 	tmp_av[tmp_av_index] = NULL;
-//	ft_free_2d(av);
+	ft_free_2d(av);
 	return (tmp_av);
 }

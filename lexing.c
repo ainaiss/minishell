@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 16:26:34 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:23:55 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int		checke_near_token(char *command)
 	index = 0;
 	while (command[index])
 	{
-		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE) && command[index + 1] > 0)
+		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE && command[index] != SPACE) && (command[index + 1] > 0 ))
 		{
 			printf("syntax error Space not found\n");
 			return (-1);

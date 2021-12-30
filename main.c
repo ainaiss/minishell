@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/30 15:56:09 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 17:25:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int argc, char **argv, char **env)
 		cmd = NULL;
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
+
 		if (!command[0])
 			continue;
 		command = lexing(command, &lampe);
