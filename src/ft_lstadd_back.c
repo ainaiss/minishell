@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:36:07 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 17:32:48 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 21:52:49 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		new->next = NULL;
-		tmp->next= new;
+			tmp->next = new;
 	}
 }
 
@@ -78,6 +78,6 @@ void	ft_lstadd_back_file(t_files **lst, t_files *new)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		new->next = NULL;
-		tmp->next= new;
+			tmp->next = new;
 	}
 }

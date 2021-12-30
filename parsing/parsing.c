@@ -6,11 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 18:44:04 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 23:17:31 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	parsing_word(char *command, t_words *cmds)
 {
@@ -21,7 +21,7 @@ void	parsing_word(char *command, t_words *cmds)
 	last_index = count;
 	if (!command || command[0] == '\n')
 		return ;
-	while(command[count] && command[count] != PIPE)
+	while (command[count] && command[count] != PIPE)
 		count++;
 	last_index = count;
 	while (command[count - 1] == ' ')
@@ -35,7 +35,8 @@ void	parsing_word(char *command, t_words *cmds)
 		last_index = count;
 		while (command[count] && command[count] != PIPE)
 			count++;
-		ft_lstadd_back_words(cmds, ft_lstnew_words(ft_strtrim(ft_substr(command, last_index, count - last_index), " ")));
+		ft_lstadd_back_words(cmds, ft_lstnew_words(ft_strtrim
+				(ft_substr(command, last_index, count - last_index), " ")));
 		count++;
 	}
 }
@@ -47,19 +48,21 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 	i = -1;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
-		return NULL;
+		return (NULL);
 	cmd->next = NULL;
-	cmd->files  = NULL;
-	cmd->args =  ft_split(words->words, SPACE);
+	cmd->files = NULL;
+	cmd->args = ft_split(words->words, SPACE);
 	if (!cmd->args[0])
 		return (cmd);
 	if (cmd->args[0][0] > 0)
 		cmd->command = ft_strdup(cmd->args[0]);
-	else if ((cmd->args[0][0] < 0 && cmd->args[0][0] != SPACE) && ft_strlen(words->words) > 1)
+	else if ((cmd->args[0][0] < 0 && cmd->args[0][0] != SPACE)
+		&& ft_strlen(words->words) > 1)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
-		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] == REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND)
+		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] ==
+			REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND)
 		{
 				i++;
 			ft_lstadd_back_file(&cmd->files, ft_lstnew_files(cmd->args[i]));
@@ -77,7 +80,6 @@ t_cmd	*parsing(t_words *words, t_cmd *cmd)
 {
 	while (words)
 	{
-		puts("here");
 		ft_lstadd_back_cmd(&cmd, parse_commands(words, cmd));
 		words = words->next;
 	}
@@ -89,7 +91,7 @@ char	**delete_array(char **av)
 	int		index;
 	int		tmp_av_index;
 	char	**tmp_av;
-	
+
 	index = 0;
 	tmp_av_index = 0;
 	tmp_av = (char **)malloc(sizeof(char *) * ft_strlen_2d(av) - 1);

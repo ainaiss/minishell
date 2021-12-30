@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/30 16:21:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 22:55:33 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define YES 1
 # define FALSE 0
 # define NO 0
+# define W 1
+# define R 0
 # define PIPE -1
 # define REDIRECTION_IN -2
 # define REDIRECTION_OUT -3
@@ -74,6 +76,12 @@ typedef struct		s_cmd
 	t_files				*files;
 	struct s_cmd		*next;
 }					t_cmd;
+
+typedef struct s_pipe
+{
+	pid_t	pid;
+	int		pipefd[2];
+}	t_pipe;
 
 /************************************** SOURCES *******************************************************/
 
@@ -116,6 +124,7 @@ void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
 void		ft_del_node_cmd(t_cmd *lst);
+int			ft_lstsize(t_cmd *lst);
 void		ft_clear_list_cmd(t_cmd *cmd);
 
 /******************************** minishell *************************************************************/
@@ -151,6 +160,12 @@ void		parse_dollar_signe(t_cmd *cmd, t_export *export);
 char		*get_var(char *var, t_export *export);
 char		*get_var_value(char *variable);
 char		**delete_array(char **av);
+
+						/********* EXECUTION *************/
+
+void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
+void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, char *command);
+void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 
 					/******** temporary_functions *******/
 

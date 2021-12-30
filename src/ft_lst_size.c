@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lst_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 19:27:59 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 21:38:25 by abarchil         ###   ########.fr       */
+/*   Created: 2021/12/30 21:06:48 by abarchil          #+#    #+#             */
+/*   Updated: 2021/12/30 21:07:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_strlen(const char *s)
+int	ft_lstsize(t_cmd *lst)
 {
-	int	i;
+	int		size;
+	t_cmd	*new;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_strlen_2d(char **s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
+	new = lst;
+	size = 0;
+	while (new)
+	{
+		size++;
+		new = new->next;
+	}
+	return (size);
 }

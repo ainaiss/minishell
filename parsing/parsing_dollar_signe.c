@@ -6,11 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 01:04:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 01:05:17 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/30 20:10:46 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 
 char	*get_var(char *var, t_export *export)
