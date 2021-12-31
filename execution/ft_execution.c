@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 23:07:35 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/31 05:37:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd)
 	}
 	if (pipe_->pid == 0)
 	{
-		puts("here");
 		execve(command, cmd->args, env);
 	}
 	else

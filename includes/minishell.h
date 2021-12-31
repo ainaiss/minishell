@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/30 22:55:33 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/31 05:34:19 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		ft_clear_list_cmd(t_cmd *cmd);
 
 void		ft_pwd(void);
 void		ft_cd(char *command);
-void		ft_echo(char *command, t_export *export);
+void		ft_echo(t_cmd *cmd);
 void		ft_export(char *var, t_export *export, int exec_print);
 void		ft_unset(char *command, t_export *export);
 void		env_command(t_export *export);
@@ -166,7 +166,8 @@ char		**delete_array(char **av);
 void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
 void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, char *command);
 void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
-
+char	*ft_check_excute(t_cmd *cmd, char **env);
+char	*ft_check_path(char **env);
 					/******** temporary_functions *******/
 
 void	put_lexing(char *command);

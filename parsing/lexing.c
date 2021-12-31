@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 20:10:42 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/31 05:44:37 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int		check_lexing_syntax(char *command)
 		return (-1);
 	else if (check_quotes(command) == 0)
 		return (-1);
-	else if (checke_near_token(command) == -1)
-		return (-1);
+	// else if (checke_near_token(command) == -1)
+	// 	return (-1);
 	while (command[count])
 	{
 		while (command[count] && command[count] != ' ')
@@ -132,7 +132,7 @@ int		checke_near_token(char *command)
 	index = 0;
 	while (command[index])
 	{
-		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE && command[index] != SPACE) && (command[index + 1] > 0 ))
+		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE && command[index] != SPACE ) && (command[index + 1] > 0 ))
 		{
 			printf("syntax error Space not found\n");
 			return (-1);
