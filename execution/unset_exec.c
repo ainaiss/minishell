@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   unset_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 07:40:59 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/21 11:48:47 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/01 17:29:07 by abarchil          #+#    #+#             */
+/*   Updated: 2022/01/01 17:53:03 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	ft_unset(char *command, t_export *export)
+int		ft_unset(t_cmd *cmd, t_export *export)
 {
-	int count;
-	int	equal;
-	count = 0;
-	equal = 0;
-	while (command[count] && command[count] != ' ')
-		count++;
-	command = &command[count + 1];
-	while (command[equal] && command[equal] != '=')
-		equal++;
-	command = ft_substr(command, 0, equal);
-	ft_del_node(export, command);
+	int		i;
+
+	i = -1;
+	if (!cmd->args[1])
+	{
+		ft_putstr_fd("unset: not enough arguments\n", 2);
+		return (1);
+	}
+	else
+	{
+		while (cmd->args[++i])
+			ft_del_node(export, cmd->args[i]);
+		return (0);
+	}
 }

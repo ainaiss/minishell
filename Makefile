@@ -6,18 +6,19 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2022/01/01 08:12:38 by abarchil         ###   ########.fr        #
+#    Updated: 2022/01/01 17:54:30 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILE = main.c export.c src/ft_strjoin.c src/ft_memcmp.c src/ft_split.c \
-	src/ft_strchr.c src/ft_strcmp.c minishell_init.c env.c execution/pwd_exec.c cd.c unset.c \
+SRC_FILE = main.c src/ft_strjoin.c src/ft_memcmp.c src/ft_split.c execution/export_exec.c \
+	src/ft_strchr.c src/ft_strcmp.c minishell_init.c env.c execution/pwd_exec.c \
 	src/ft_calloc.c src/ft_del_node.c src/ft_isalpha.c src/ft_memcpy.c src/ft_lstnew.c \
 	src/ft_memmove.c src/ft_memset.c src/ft_putstr_fd.c src/ft_putchar_fd.c src/ft_remchar.c \
 	src/ft_strdup.c src/ft_strlen.c src/ft_strtrim.c src/ft_substr.c src/get_next_line.c \
 	src/ft_bzero.c src/ft_lstadd_back.c parsing/lexing.c parsing/parsing.c src/ft_strndup.c \
 	parsing/parsing_dollar_signe.c src/ft_free_2d.c execution/ft_execution.c src/ft_lst_size.c \
-	execution/echo_exec.c src/ft_isdigit.c execution/exit_exec.c src/ft_atoi.c
+	execution/echo_exec.c src/ft_isdigit.c execution/exit_exec.c src/ft_atoi.c execution/cd_exec.c \
+	execution/unset_exec.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 08:12:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 17:53:27 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
+char 		*ft_search_in_list(t_export *export , char *name);
 int			ft_lstsize(t_cmd *lst);
 void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list_cmd(t_cmd *cmd);
@@ -133,12 +134,12 @@ void		ft_clear_list_cmd(t_cmd *cmd);
 
 						/******** builtins *******/
 
-void		ft_pwd(t_cmd *cmd);
-void		ft_cd(char *command);
+void		ft_pwd(t_cmd *cmd, t_export *export);
+void		ft_cd(t_cmd *cmd, t_export *export);
 void		ft_echo(t_cmd *cmd);
 void		ft_exit(t_cmd *cmd);
-void		ft_export(char *var, t_export *export, int exec_print);
-void		ft_unset(char *command, t_export *export);
+void		ft_export(t_cmd *cmd, t_export *export);
+int			ft_unset(t_cmd *cmd, t_export *export);
 void		env_command(t_export *export);
 
 						/********** lixing **********/
@@ -154,8 +155,10 @@ int			check_quotes(char *command);
 
 void		check_command(char *command, char **env, t_export *export);
 void		environment_init(char **env, t_export *export);
+void		ft_export_init(char *var, t_export *export, int exec_print);
 void		parsing_export_command(char *command, t_export *export);
 void		print_export(t_export *export);
+char		*set_double_quotes(char *var);
 void		parsing_word(char *command, t_words *cmds);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 t_cmd		*parsing(t_words *words, t_cmd *cmd);
@@ -171,6 +174,8 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, char *command);
 void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 char	*ft_check_excute(t_cmd *cmd, char **env);
 char	*ft_check_path(char **env);
+void	ft_replace_directory(t_export *export);
+void	replace_pwd(t_export *export);
 					/******** temporary_functions *******/
 
 void	put_lexing(char *command);
