@@ -6,7 +6,7 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2021/12/31 05:35:41 by abarchil         ###   ########.fr        #
+#    Updated: 2022/01/01 08:12:38 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_FILE = main.c export.c src/ft_strjoin.c src/ft_memcmp.c src/ft_split.c \
 	src/ft_strdup.c src/ft_strlen.c src/ft_strtrim.c src/ft_substr.c src/get_next_line.c \
 	src/ft_bzero.c src/ft_lstadd_back.c parsing/lexing.c parsing/parsing.c src/ft_strndup.c \
 	parsing/parsing_dollar_signe.c src/ft_free_2d.c execution/ft_execution.c src/ft_lst_size.c \
-	execution/echo_exec.c
+	execution/echo_exec.c src/ft_isdigit.c execution/exit_exec.c src/ft_atoi.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 

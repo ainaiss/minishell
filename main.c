@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 07:02:13 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 08:09:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **env)
 		else if (!ft_strcmp(cmd->command, "pwd") || !ft_strcmp(cmd->command, "PWD"))
 			ft_pwd(cmd);
 		else if (!ft_strcmp(cmd->command, "exit") || !ft_strcmp(cmd->command, "EXIT"))
-			exit(0);
+			ft_exit(cmd);
 		// if (ft_lstsize(cmd) == 1)
 		// {
 		// 	command = ft_check_excute(cmd, env);

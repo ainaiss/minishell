@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/31 09:01:51 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 08:12:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,10 @@ char   		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, int start, size_t len);
+int			ft_atoi(const char *str);
 char		*ft_strndup(const char *s, int n);
 void		ft_free_2d(char **av);
+int			ft_isdigit(int c);
 
 					/****** linked list *********/
 
@@ -123,8 +125,8 @@ void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
-void		ft_del_node_cmd(t_cmd *lst);
 int			ft_lstsize(t_cmd *lst);
+void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list_cmd(t_cmd *cmd);
 
 /******************************** minishell *************************************************************/
@@ -134,6 +136,7 @@ void		ft_clear_list_cmd(t_cmd *cmd);
 void		ft_pwd(t_cmd *cmd);
 void		ft_cd(char *command);
 void		ft_echo(t_cmd *cmd);
+void		ft_exit(t_cmd *cmd);
 void		ft_export(char *var, t_export *export, int exec_print);
 void		ft_unset(char *command, t_export *export);
 void		env_command(t_export *export);
