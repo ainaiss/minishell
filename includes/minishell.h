@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/31 05:34:19 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/31 09:01:51 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void		ft_clear_list_cmd(t_cmd *cmd);
 
 						/******** builtins *******/
 
-void		ft_pwd(void);
+void		ft_pwd(t_cmd *cmd);
 void		ft_cd(char *command);
 void		ft_echo(t_cmd *cmd);
 void		ft_export(char *var, t_export *export, int exec_print);

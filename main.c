@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/31 05:38:01 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 07:02:13 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,16 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
-		//parse_dollar_signe(cmd, &export);
-		if (!ft_memcmp(cmd->command, "echo", 4))
+		// int i = -1;
+		// while (cmd->args[++i])
+		// 	puts(cmd->args[i]);
+		parse_dollar_signe(cmd, &export);
+		if (!ft_strcmp(cmd->command, "echo") || !ft_strcmp(cmd->command, "ECHO"))
 			ft_echo(cmd);
+		else if (!ft_strcmp(cmd->command, "pwd") || !ft_strcmp(cmd->command, "PWD"))
+			ft_pwd(cmd);
+		else if (!ft_strcmp(cmd->command, "exit") || !ft_strcmp(cmd->command, "EXIT"))
+			exit(0);
 		// if (ft_lstsize(cmd) == 1)
 		// {
 		// 	command = ft_check_excute(cmd, env);

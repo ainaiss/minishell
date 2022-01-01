@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 05:27:02 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/31 08:54:52 by abarchil         ###   ########.fr       */
+/*   Updated: 2021/12/31 10:43:30 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void		ft_echo(t_cmd *cmd)
 
 	new_line = 0;
 	index = 0;
+	// puts(cmd->args[1]);
+	// puts(cmd->args[2]);
 	if (!cmd->args[1])
 	{
 		ft_putchar_fd('\n', 1);
