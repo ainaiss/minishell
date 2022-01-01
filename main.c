@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 17:58:33 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 18:06:15 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **env)
 		else if (!ft_strcmp(cmd->command, "unset") || !ft_strcmp(cmd->command, "UNSET"))
 			ft_unset(cmd, &export);
 		else if (!ft_strcmp(cmd->command, "env") || !ft_strcmp(cmd->command, "ENV"))
-			ft_unset(cmd, &export);
+			ft_env(&export);
 		//else
 		//{
 		// if (ft_lstsize(cmd) == 1)

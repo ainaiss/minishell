@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 17:53:27 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/01 18:05:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void		ft_echo(t_cmd *cmd);
 void		ft_exit(t_cmd *cmd);
 void		ft_export(t_cmd *cmd, t_export *export);
 int			ft_unset(t_cmd *cmd, t_export *export);
-void		env_command(t_export *export);
+void		ft_env(t_export *export);
 
 						/********** lixing **********/
 
