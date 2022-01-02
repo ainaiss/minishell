@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 14:40:59 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 19:51:14 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **env)
 	t_cmd		*cmd;
 	char		*command;
 	int			*lampe;
-	// int i = 1;
+	//int i = -1;
 	// while(i);
 	(void)argc;
 	(void)argv;
@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **env)
 	while (TRUE)
 	{
 		cmd = NULL;
-		//printf("%d\n", getpid());
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
 		if (!command[0])

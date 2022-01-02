@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 06:56:00 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 21:05:27 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 	{
 		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] == REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND)
 		{
-				i++;
-			ft_lstadd_back_file(&cmd->files, ft_lstnew_files(cmd->args[i]));
-			if (cmd->args[i][0] == REDIRECTION_IN)
+			i++;
+			ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i])));
+			if (cmd->args[i - 1][0] == REDIRECTION_IN)
 				cmd->files->type = 2;
-			else if (cmd->args[i][0] == REDIRECTION_OUT)
+			else if (cmd->args[i - 1][0] == REDIRECTION_OUT)
 				cmd->files->type = 3;
 		}
 		else if (cmd->args[i][0] == DOUBLE_QUOTES)

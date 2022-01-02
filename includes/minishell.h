@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 03:11:08 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 16:42:47 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_words
 typedef struct s_files
 {
 	int				type;
+	int				fd;
 	char			*filename;
 	struct s_files	*next;
 
@@ -153,19 +154,21 @@ int			check_quotes(char *command);
 
 						/******** parsing *******/
 
-void		check_command(t_cmd *cmd, t_export *export);
-void		environment_init(char **env, t_export *export);
-void		ft_export_init(char *var, t_export *export, int exec_print);
-void		parsing_export_command(char *command, t_export *export);
-void		print_export(t_export *export);
-char		*set_double_quotes(char *var);
-void		parsing_word(char *command, t_words *cmds);
-t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
-t_cmd		*parsing(t_words *words, t_cmd *cmd);
-void		parse_dollar_signe(t_cmd *cmd, t_export *export);
-char		*get_var(char *var, t_export *export);
-char		*get_var_value(char *variable);
+void		open_files(t_cmd *cmd);
+void		handling_input(t_cmd *cmd);
 char		**delete_array(char **av);
+char		*set_double_quotes(char *var);
+char		*get_var_value(char *variable);
+void		print_export(t_export *export);
+t_cmd		*parsing(t_words *words, t_cmd *cmd);
+char		*get_var(char *var, t_export *export);
+void		parsing_word(char *command, t_words *cmds);
+void		check_command(t_cmd *cmd, t_export *export);
+t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
+void		environment_init(char **env, t_export *export);
+void		parse_dollar_signe(t_cmd *cmd, t_export *export);
+void		parsing_export_command(char *command, t_export *export);
+void		ft_export_init(char *var, t_export *export, int exec_print);
 
 						/********* EXECUTION *************/
 
