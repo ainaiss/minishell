@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 01:18:29 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 03:11:08 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		ft_putstr_fd(char *s, int fd);
 char		**ft_split(char const *s, char c);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char const *s1, char const *s2);
-int			ft_strlen(const char *s);
+size_t		ft_strlen(const char *s);
 int			ft_strlen_2d(char **s);
 char		*get_next_line(int fd);
 int			ft_strcmp(const char *s1, const char *s2);
@@ -107,7 +107,7 @@ int			ft_strchr_index(char *s, int c);
 char   		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
-char		*ft_substr(char const *s, int start, size_t len);
+char		*ft_substr(char const *s, size_t start, size_t len);
 int			ft_atoi(const char *str);
 char		*ft_strndup(const char *s, int n);
 void		ft_free_2d(char **av);
@@ -170,12 +170,13 @@ char		**delete_array(char **av);
 						/********* EXECUTION *************/
 
 void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
-void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, char *command);
+void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd);
 void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 char	*ft_check_excute(t_cmd *cmd, char **env);
 char	*ft_check_path(char **env);
 void	ft_replace_directory(t_export *export);
 void	replace_pwd(t_export *export);
+
 					/******** temporary_functions *******/
 
 void	put_lexing(char *command);

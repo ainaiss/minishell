@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:46:10 by fel-boua          #+#    #+#             */
-/*   Updated: 2021/12/30 23:19:35 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 02:39:40 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*remchar(char *s, char c)
 
 	count = 0;
 	res_count = 0;
+	if (!s)
+		return (NULL);
 	res = (char *)malloc(sizeof(char) * (ft_strlen(s) - count_c(s, c) + 1));
 	if (!res)
 		return (NULL);

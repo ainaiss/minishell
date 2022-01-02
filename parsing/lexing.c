@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/31 09:25:34 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 02:24:02 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	lexing_first_char(char *command)
 		printf("syntax error near unexpected token `|'\n");
 		return (0);
 	}
-	else if (command[0] < 0 && ft_strlen(command) == 1)
+	else if ((command[0] < 0 && command[0] > -6 ) && ft_strlen(command) == 1)
 	{
 		printf("syntax error near unexpected token `newline'\n");
 		return (0);

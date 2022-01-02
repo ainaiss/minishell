@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 01:16:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 02:13:21 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 02:19:24 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_command(t_cmd *cmd, t_export *export)
 {
+	if (!cmd->command)
+		return ;
 	if (!ft_strcmp(cmd->command, "echo") || !ft_strcmp(cmd->command, "ECHO"))
 			ft_echo(cmd);
 		else if (!ft_strcmp(cmd->command, "pwd") || !ft_strcmp(cmd->command, "PWD"))

@@ -6,13 +6,13 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:27:46 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/21 08:49:05 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 02:28:03 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_substr(char const *s, int start, size_t len)
+char	*ft_substr(char const *s, size_t start, size_t len)
 {
 	char			*str;
 	char			*res_tab;
