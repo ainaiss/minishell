@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 18:06:15 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 02:12:17 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,57 +37,11 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
-		// int i = -1;
-		// while (cmd->args[++i])
-		// 	puts(cmd->args[i]);
 		parse_dollar_signe(cmd, &export);
-		if (!ft_strcmp(cmd->command, "echo") || !ft_strcmp(cmd->command, "ECHO"))
-			ft_echo(cmd);
-		else if (!ft_strcmp(cmd->command, "pwd") || !ft_strcmp(cmd->command, "PWD"))
-			ft_pwd(cmd, &export);
-		else if (!ft_strcmp(cmd->command, "exit") || !ft_strcmp(cmd->command, "EXIT"))
-			ft_exit(cmd);
-		else if (!ft_strcmp(cmd->command, "cd") || !ft_strcmp(cmd->command, "CD"))
-			ft_cd(cmd, &export);
-		else if (!ft_strcmp(cmd->command, "export") || !ft_strcmp(cmd->command, "EXPORT"))
-			ft_export(cmd, &export);
-		else if (!ft_strcmp(cmd->command, "unset") || !ft_strcmp(cmd->command, "UNSET"))
-			ft_unset(cmd, &export);
-		else if (!ft_strcmp(cmd->command, "env") || !ft_strcmp(cmd->command, "ENV"))
-			ft_env(&export);
-		//else
-		//{
-		// if (ft_lstsize(cmd) == 1)
-		// {
-		// 	command = ft_check_excute(cmd, env);
-		// 	pipe_.pid = fork();
-		// 	if (pipe_.pid == -1)
-		// 	{
-		// 		perror("fork");
-		// 		exit(EXIT_FAILURE);
-		// 	}
-		// 	if (pipe_.pid == 0)
-		// 	{
-		// 		execve(command, cmd->args, env);
-		// 	}
-		// 	else
-		// 	waitpid(-1, NULL, 0);
-		// }
-		// else if(ft_lstsize(cmd) > 1)
-		// {
-		// 	while (cmd)
-		// 	{
-		// 		command = ft_check_excute(cmd, env);
-		// 		ft_child_process(env, &pipe_, cmd, command);
-		// 		free(command);
-		// 		cmd = cmd->next;
-		// 	}
-		// }
-		//}
-		//ft_execution(env, &pipe_, cmd);
+		check_command(cmd, &export);
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
 		free(command);
-		}
+	}
 	return (0);
 }

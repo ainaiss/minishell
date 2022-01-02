@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/01 18:05:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 01:18:29 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int			check_quotes(char *command);
 
 						/******** parsing *******/
 
-void		check_command(char *command, char **env, t_export *export);
+void		check_command(t_cmd *cmd, t_export *export);
 void		environment_init(char **env, t_export *export);
 void		ft_export_init(char *var, t_export *export, int exec_print);
 void		parsing_export_command(char *command, t_export *export);
