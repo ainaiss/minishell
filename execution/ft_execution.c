@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 14:05:39 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/02 14:42:34 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 	}
 	if (pipe_->pid == 0)
 	{
-		while(cmd && cmd_count)
+		while(cmd->next && cmd_count - 1)
 		{
 			pipe(pipe_->pipefd);
 			pipe_->pid = fork();
@@ -43,7 +43,6 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 					dup2(pipe_->pipefd[W], STDOUT_FILENO);
 				}
 				execve(command, cmd->args, env);
-				free(command);
 			}
 			else
 			{
@@ -54,6 +53,10 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 			cmd_count--;
 			cmd = cmd->next;
 		}
+			command = ft_check_excute(cmd, env);
+				execve(command, cmd->args, env);
+				free(command);
+		
 	}
 		else
 			waitpid(-1, NULL, 0);
