@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/28 22:16:59 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/03 22:44:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	ft_clear_list(t_words *words)
 {
 	t_words *tmp;
 
-	tmp = words->next;
+	if (words->next)
+		tmp = words->next;
+	else
+		tmp = words;
 	while (words)
 	{
 		tmp = words;
@@ -68,6 +71,8 @@ void	ft_clear_list_cmd(t_cmd *cmd)
 	int		index;
 	
 	index = -1;
+	if(!cmd)
+		return;
 	if (cmd->command)
 	{
 		while (cmd)

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 07:58:13 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 08:16:42 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 22:45:32 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	ft_isnumber(char *number)
 
 void	ft_exit(t_cmd *cmd)
 {
+	if (!cmd)
+	{
+		ft_putstr_fd("exit\n", 1);
+		exit(0);
+	}
 	if (ft_strlen_2d(cmd->args) > 2)
 		ft_putstr_fd("exit: too many arguments\n", 1);
 	else if (ft_strlen_2d(cmd->args) == 1)

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/03 20:45:11 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 22:42:21 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	main(int argc, char **argv, char **env)
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
 		if (!command)
-			exit(0);
+			ft_exit(cmd);
+		if (!command[0])
+			continue;
 		command = lexing(command, &lampe);
 		if (check_lexing_syntax(command) == -1)
 			continue;
