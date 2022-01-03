@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 18:59:40 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 23:24:28 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	**delete_array(char **av)
 	{
 		if ((av[index][0] < 0 && av[index][0] > -6)&& av[index + 2])
 			index += 2;
-		else if (av[index][0] < 0 && !av[index + 2])
+		else if ((av[index][0] < 0 && av[index][0] > -6 ) && !av[index + 2])
 			break ;
 		else
 		{

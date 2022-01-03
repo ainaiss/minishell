@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/03 22:42:21 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 23:40:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ int	main(int argc, char **argv, char **env)
 	t_cmd		*cmd;
 	char		*command;
 	int			*lampe;
+
 	(void)argc;
 	(void)argv;
-	// int i= 1;
-	// while (i);
 	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
 	signals();
@@ -72,10 +71,9 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
-		//parse_dollar_signe(cmd, &export);
+		parse_dollar_signe(cmd, &export);
 		ft_child_process(env, &pipe_, cmd);
 		//check_command(cmd, &export);
-		//ft_execution(env, &pipe_, cmd);
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
 		free(command);

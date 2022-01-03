@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 01:04:57 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 20:10:46 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 23:39:53 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 						cmd->args[index] = ft_substr(cmd->args[index], 0, tmp);
 						break;
 					}
-					tmp_arg = ft_strjoin(ft_substr(cmd->args[index], 0, tmp), get_var_value(var));
+					tmp_arg = remchar(ft_strjoin(ft_substr(cmd->args[index], 0, tmp), get_var_value(var)), '\"');
 					cmd->args[index] = ft_strjoin(tmp_arg, ft_substr(cmd->args[index], count, ft_strlen(cmd->args[index])));
 				}
 				count++;
