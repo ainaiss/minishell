@@ -6,33 +6,15 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 16:15:34 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 23:20:58 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 01:04:14 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	open_files(t_cmd *cmd)
-{
-	while (cmd->files)
-	{
-		if (cmd->files->type == 2)
-			cmd->files->fd = open(cmd->files->filename, O_CREAT | O_RDWR, 0644);
-		else if(cmd->files->type == 3)
-			cmd->files->fd = open(cmd->files->filename, O_CREAT | O_RDWR, 0644);
-		else if(cmd->files->type == 4)
-			cmd->files->fd = open(cmd->files->filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		//else if(cmd->files->type == 5)
-			//hredoc
-		cmd->files = cmd->files->next;
-	}
-}
 
 void	handling_input(t_cmd *cmd)
 {
-	printf("%d\n", cmd->files->type);
-	printf("%d\n", cmd->files->fd);
-	puts(cmd->files->filename);
 	while (cmd->files)
 	{
 		if (cmd->files->type == 2)

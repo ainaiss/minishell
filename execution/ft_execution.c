@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 23:47:08 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 01:16:44 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 	}
 	if (pipe_->pid == 0)
 	{
+		//open_files(cmd);
 		while(cmd->next && cmd_count - 1)
 		{
 			pipe(pipe_->pipefd);
@@ -37,6 +38,15 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 			if (pipe_->pid == 0)
 			{
 				command = ft_check_excute(cmd, env);
+				if (cmd->files)
+				{
+					if (cmd->files->type == 2 || cmd->files->type == 3)
+						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
+					else if (cmd->files->type == 4)
+						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
+					dup2( cmd->files->fd, STDOUT_FILENO);
+					close(cmd->files->fd);
+				}
 				close(pipe_->pipefd[R]);
 				dup2(pipe_->pipefd[W], STDOUT_FILENO);
 				execve(command, cmd->args, env);
@@ -46,20 +56,20 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 				close(pipe_->pipefd[W]);
 				dup2(pipe_->pipefd[R], STDIN_FILENO);
 				wait(NULL);
-			} 
+			}
 			cmd_count--;
 			cmd = cmd->next;
 		}
-		puts("here");
 		command = ft_check_excute(cmd, env);
-	//	open_files(cmd);
-		
-		// handling_input(cmd);
-		cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
-		printf("%d\n", cmd->files->fd);
-			//close(STDOUT_FILENO);
-		dup2( cmd->files->fd, STDOUT_FILENO);
+		if (cmd->files)
+		{
+			if (cmd->files->type == 2 || cmd->files->type == 3)
+				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
+			else if (cmd->files->type == 4)
+				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
+			dup2( cmd->files->fd, STDOUT_FILENO);
 			close(cmd->files->fd);
+		}
 		execve(command, cmd->args, env);
 		free(command);
 	}
