@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 16:42:47 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:59:32 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+
 # define GREEN "\e[0;32m"
 # define RESET "\e[0m"
 # define RED "\e[1;91m"
@@ -42,7 +44,7 @@
 # define REDIRECTION_OUT_APPEND -4
 # define HER_DOC -5
 # define DOLLAR_SIGNE -6
-# define SPACE -7
+# define DELIMITER -7
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
 # define BACK_SLASH -10
@@ -180,6 +182,9 @@ char	*ft_check_path(char **env);
 void	ft_replace_directory(t_export *export);
 void	replace_pwd(t_export *export);
 
+						/********* SIGNEL *************/
+void	sigint_handler(int sig);
+void	signals(void);
 					/******** temporary_functions *******/
 
 void	put_lexing(char *command);

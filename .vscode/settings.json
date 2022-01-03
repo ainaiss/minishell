@@ -3,7 +3,9 @@
 		"libft.h": "c",
 		"stddef.h": "c",
 		"minishell.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"readline.h": "c",
+		"history.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 01:14:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:59:40 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		return (NULL);
 	cmd->next = NULL;
 	cmd->files = NULL;
-	cmd->args = ft_split(words->words, SPACE);
+	cmd->args = ft_split(words->words, DELIMITER);
 	if (!cmd->args[0])
 		return (cmd);
 	if (cmd->args[0][0] > 0)
 		cmd->command = ft_strdup(cmd->args[0]);
-	else if ((cmd->args[0][0] < 0 && cmd->args[0][0] != SPACE)
+	else if ((cmd->args[0][0] < 0 && cmd->args[0][0] != DELIMITER)
 		&& ft_strlen(words->words) > 1)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 12:54:00 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 02:24:02 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:59:38 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*lexing(char *command, int **lampe)
 		else if ((command[count] == '$' && !lampe[0][1]) || (command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
 			command[count] = DOLLAR_SIGNE;
 		else if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
-			command[count] = SPACE;
+			command[count] = DELIMITER;
 		else if ((command[count] == '\\' && !lampe[0][1]) || (command[count] == '\\' && !lampe[0][1] && !lampe[0][2]))
 			command[count] = BACK_SLASH;
 		else if (command[count] == '\"')
@@ -83,9 +83,9 @@ int		lexing_last_char(char *command)
 	int	size;
 
 	size = ft_strlen(command) - 1;
-	while (command[size] == SPACE)
+	while (command[size] == DELIMITER)
 		size--;
-	if (command[size] < 0 && command[size] != SPACE && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
+	if (command[size] < 0 && command[size] != DELIMITER && command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);
@@ -132,9 +132,9 @@ int		checke_near_token(char *command)
 	index = 0;
 	while (command[index])
 	{
-		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE && command[index] != SPACE ) && (command[index + 1] > 0 ))
+		if ((command[index] < 0 && command[index] != DOLLAR_SIGNE && command[index] != DELIMITER ) && (command[index + 1] > 0 ))
 		{
-			printf("syntax error Space not found\n");
+			printf("syntax error DELIMITER not found\n");
 			return (-1);
 		}
 		index++;	

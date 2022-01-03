@@ -6,7 +6,7 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2022/01/02 16:31:41 by abarchil         ###   ########.fr        #
+#    Updated: 2022/01/03 19:00:15 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,10 @@ all : $(NAME)
 #	@echo "           		MADE WITH 💜 BY : abarchil & fel-boua $(RED)"
 %.o:%.c includes/minishell.h
 	@echo "$(CYAN)           		<----------- COMPILING $< -----------> $(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 $(NAME) : $(OBJ_FILE)
-	@$(CC) $(CFLAGS) $(OBJ_FILE)  -lreadline -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_FILE) -L$(shell brew --prefix readline)/lib   -lreadline  -o $(NAME)
 
 clean :
 	@echo "$(YELLOW)           		<----------- REMOVING OBJECT FILES ----------->$(RESET)"

@@ -6,11 +6,34 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 19:51:14 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:30:18 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
+// void	sigint_handler_D(int sig)
+// {
+// 	(void) sig;
+// 	ft_putstr_fd("\n", 1);
+// 	rl_on_new_line();
+// 	rl_replace_line("", 0);
+// 	rl_redisplay();
+// }
+
+void	sigint_handler(int sig)
+{
+	(void) sig;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	signals(void)
+{
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, exit);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -20,12 +43,11 @@ int	main(int argc, char **argv, char **env)
 	t_cmd		*cmd;
 	char		*command;
 	int			*lampe;
-	//int i = -1;
-	// while(i);
 	(void)argc;
 	(void)argv;
 	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
+	signals();
 	while (TRUE)
 	{
 		cmd = NULL;

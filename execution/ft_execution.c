@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 01:16:44 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 04:17:35 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 {
 	int	cmd_count;
 	char *command;
+	int fd;
+
+	fd = 0;
 	cmd_count = ft_lstsize(cmd);
 	if (pipe(pipe_->pipefd) == -1)
 	{
@@ -30,7 +33,6 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 	}
 	if (pipe_->pid == 0)
 	{
-		//open_files(cmd);
 		while(cmd->next && cmd_count - 1)
 		{
 			pipe(pipe_->pipefd);
