@@ -6,11 +6,19 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/03 19:30:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/03 20:45:11 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
+
+void	signal_quit(int sig)
+{
+	(void)sig;
+	puts("here");
+	exit(0);
+}
+
 // void	sigint_handler_D(int sig)
 // {
 // 	(void) sig;
@@ -32,7 +40,7 @@ void	sigint_handler(int sig)
 void	signals(void)
 {
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, exit);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -45,6 +53,8 @@ int	main(int argc, char **argv, char **env)
 	int			*lampe;
 	(void)argc;
 	(void)argv;
+	// int i= 1;
+	// while (i);
 	lampe = ft_calloc(2, 4);
 	environment_init(env, &export);
 	signals();
@@ -53,8 +63,8 @@ int	main(int argc, char **argv, char **env)
 		cmd = NULL;
 		command = readline("\e[1;91mminishell_> \e[0m");
 		add_history(command);
-		if (!command[0])
-			continue;
+		if (!command)
+			exit(0);
 		command = lexing(command, &lampe);
 		if (check_lexing_syntax(command) == -1)
 			continue;
