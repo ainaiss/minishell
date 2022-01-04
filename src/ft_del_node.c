@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 22:44:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:32:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_del_node(t_export *lst, char *content)
 {
-	t_export *tmp;
+	t_export	*tmp;
+
 	while (lst->next)
 	{
 		tmp = lst->next;
@@ -33,7 +34,8 @@ void	ft_del_node(t_export *lst, char *content)
 
 void	ft_del_node_cmd(t_cmd *lst)
 {
-	t_cmd *tmp;
+	t_cmd	*tmp;
+
 	tmp = lst->next;
 	if (!tmp->command)
 	{
@@ -49,7 +51,7 @@ void	ft_del_node_cmd(t_cmd *lst)
 
 void	ft_clear_list(t_words *words)
 {
-	t_words *tmp;
+	t_words		*tmp;
 
 	if (words->next)
 		tmp = words->next;
@@ -67,12 +69,12 @@ void	ft_clear_list(t_words *words)
 
 void	ft_clear_list_cmd(t_cmd *cmd)
 {
-	t_cmd 	*tmp;
+	t_cmd	*tmp;
 	int		index;
-	
+
 	index = -1;
-	if(!cmd)
-		return;
+	if (!cmd)
+		return ;
 	if (cmd->command)
 	{
 		while (cmd)

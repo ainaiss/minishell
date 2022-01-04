@@ -6,12 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:59:42 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 18:01:20 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:14:42 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-void	ft_env(t_export *export)
+int		ft_env(t_export *export)
 {
 	while (export)
 	{
@@ -24,4 +24,5 @@ void	ft_env(t_export *export)
 		else
 			export = export->next;
 	}
+	return (0);
 }

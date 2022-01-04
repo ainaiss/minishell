@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 15:19:43 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:19:01 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_replace_directory(t_export *export)
 	free(new_dir);
 }
 
-void	ft_cd(t_cmd *cmd, t_export *export)
+int		ft_cd(t_cmd *cmd, t_export *export)
 {
 	char	*dir;
 	char	*tmp;
@@ -88,4 +88,5 @@ void	ft_cd(t_cmd *cmd, t_export *export)
 		perror("cd");
 	replace_pwd(export);
 	ft_replace_directory(export);
+	return (0);
 }

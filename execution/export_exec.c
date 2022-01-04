@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 15:24:09 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 17:08:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:15:08 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_export(t_export *export)
 	}
 }
 
-void	ft_export(t_cmd *cmd, t_export *export)
+int		ft_export(t_cmd *cmd, t_export *export)
 {
 	int		i;
 
@@ -79,4 +79,5 @@ void	ft_export(t_cmd *cmd, t_export *export)
 				ft_export_init(cmd->args[i], export, 0);
 		}
 	}
+	return (0);
 }

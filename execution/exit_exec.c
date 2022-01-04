@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 07:58:13 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 22:45:32 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:14:54 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_isnumber(char *number)
 	return (1);
 }
 
-void	ft_exit(t_cmd *cmd)
+int	ft_exit(t_cmd *cmd)
 {
 	if (!cmd)
 	{
@@ -46,4 +46,5 @@ void	ft_exit(t_cmd *cmd)
 	}
 	else
 		exit(ft_atoi(cmd->args[1]));
+	return (0);
 }

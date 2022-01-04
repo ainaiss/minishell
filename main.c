@@ -6,42 +6,11 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/03 23:40:26 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:09:27 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
-
-void	signal_quit(int sig)
-{
-	(void)sig;
-	puts("here");
-	exit(0);
-}
-
-// void	sigint_handler_D(int sig)
-// {
-// 	(void) sig;
-// 	ft_putstr_fd("\n", 1);
-// 	rl_on_new_line();
-// 	rl_replace_line("", 0);
-// 	rl_redisplay();
-// }
-
-void	sigint_handler(int sig)
-{
-	(void) sig;
-	ft_putstr_fd("\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	signals(void)
-{
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -72,8 +41,7 @@ int	main(int argc, char **argv, char **env)
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
 		parse_dollar_signe(cmd, &export);
-		ft_child_process(env, &pipe_, cmd);
-		//check_command(cmd, &export);
+		ft_child_process(env, &pipe_, cmd, &export);
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
 		free(command);

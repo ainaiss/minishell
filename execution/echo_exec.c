@@ -6,13 +6,13 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 05:27:02 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 23:34:05 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 02:22:56 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void		ft_echo(t_cmd *cmd)
+int		ft_echo(t_cmd *cmd)
 {
 	int		index;
 	int		new_line;
@@ -22,7 +22,7 @@ void		ft_echo(t_cmd *cmd)
 	if (!cmd->args[1])
 	{
 		ft_putchar_fd('\n', 1);
-		return ;
+		return (0);
 	}
 	if (cmd->args[1][0] == '-' && cmd->args[1][1] == 'n')
 	{
@@ -40,4 +40,5 @@ void		ft_echo(t_cmd *cmd)
 	}
 	if (new_line == 0)
 		ft_putchar_fd('\n', 1);
+	return (0);
 }

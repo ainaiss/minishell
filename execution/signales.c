@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_2d.c                                       :+:      :+:    :+:   */
+/*   signales.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/30 14:36:43 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 01:28:45 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/03 23:43:22 by abarchil          #+#    #+#             */
+/*   Updated: 2022/01/03 23:53:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_free_2d(char **av)
+void	sigint_handler(int sig)
 {
-	int		index;
+	(void) sig;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-	index = -1;
-	while (av[++index])
-	{
-		free(av[index]);
-		av[index] = NULL;
-	}
-	free(av);
-	av = NULL;
+void	signals(void)
+{
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

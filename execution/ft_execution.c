@@ -6,13 +6,13 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 04:17:35 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 02:33:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
+void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, t_export *export)
 {
 	int	cmd_count;
 	char *command;
@@ -51,7 +51,8 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 				}
 				close(pipe_->pipefd[R]);
 				dup2(pipe_->pipefd[W], STDOUT_FILENO);
-				execve(command, cmd->args, env);
+				if (check_command(cmd, export) == -1)
+					execve(command, cmd->args, env);
 			}
 			else
 			{
@@ -72,7 +73,8 @@ void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd)
 			dup2( cmd->files->fd, STDOUT_FILENO);
 			close(cmd->files->fd);
 		}
-		execve(command, cmd->args, env);
+		else if(check_command(cmd, export) == -1)
+			execve(command, cmd->args, env);
 		free(command);
 	}
 		else
@@ -124,48 +126,3 @@ char	*ft_check_excute(t_cmd *cmd, char **env)
 	free(splited_path);
 	return (NULL);
 }
-
-
-// void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd)
-// {
-// 	int		cmd_count;
-// 	char	*command;
-	
-// 	command = ft_check_excute(cmd, env);
-// 	if (!command)
-// 	{
-// 		printf("command not found \n");
-// 		return;
-// 	}
-// 	cmd_count = ft_lstsize(cmd);
-// 	// if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-// 	// {
-// 	// 	pre_here_doc(pipe_, argv[2], argc);
-// 	// 	unlink(".here_doc");
-// 	// 	if (argv[3] == NULL || argc == 4)
-// 	// 		return (0);
-// 	// }
-
-// 	if (cmd_count == 1)
-// 	{
-// 		pipe_->pid = fork();
-// 	if (pipe_->pid == -1)
-// 	{
-// 		perror("fork");
-// 		exit(EXIT_FAILURE);
-// 	}
-// 	if (pipe_->pid == 0)
-// 	{
-// 		execve(command, cmd->args, env);
-// 	}
-// 	else
-// 		waitpid(-1, NULL, 0);
-// 		cmd_count--;
-// 	}
-// 	while (cmd && cmd_count)
-// 	{
-// 		ft_child_process(env, pipe_, cmd, command);
-// 		cmd_count--;
-// 		cmd = cmd->next;
-// 	}
-// }

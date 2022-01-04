@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/03 23:35:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:16:33 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,13 @@ void		ft_clear_list_cmd(t_cmd *cmd);
 
 						/******** builtins *******/
 
-void		ft_pwd(t_cmd *cmd, t_export *export);
-void		ft_cd(t_cmd *cmd, t_export *export);
-void		ft_echo(t_cmd *cmd);
-void		ft_exit(t_cmd *cmd);
-void		ft_export(t_cmd *cmd, t_export *export);
-int			ft_unset(t_cmd *cmd, t_export *export);
-void		ft_env(t_export *export);
+int		ft_pwd(t_cmd *cmd, t_export *export);
+int		ft_cd(t_cmd *cmd, t_export *export);
+int		ft_echo(t_cmd *cmd);
+int		ft_exit(t_cmd *cmd);
+int		ft_export(t_cmd *cmd, t_export *export);
+int		ft_unset(t_cmd *cmd, t_export *export);
+int		ft_env(t_export *export);
 
 						/********** lixing **********/
 
@@ -163,7 +163,7 @@ void		print_export(t_export *export);
 t_cmd		*parsing(t_words *words, t_cmd *cmd);
 char		*get_var(char *var, t_export *export);
 void		parsing_word(char *command, t_words *cmds);
-void		check_command(t_cmd *cmd, t_export *export);
+int			check_command(t_cmd *cmd, t_export *export);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 void		environment_init(char **env, t_export *export);
 void		parse_dollar_signe(t_cmd *cmd, t_export *export);
@@ -173,7 +173,7 @@ void		ft_export_init(char *var, t_export *export, int exec_print);
 						/********* EXECUTION *************/
 
 void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
-void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd);
+void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, t_export *export);
 void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 char	*ft_check_excute(t_cmd *cmd, char **env);
 char	*ft_check_path(char **env);

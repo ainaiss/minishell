@@ -6,16 +6,16 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:46:10 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/02 02:39:40 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 01:27:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		count_c(char *s, char c)
+int	count_c(char *s, char c)
 {
-	int     count;
-	int     i;
+	int		count;
+	int		i;
 
 	i = 0;
 	count = 0;
@@ -30,9 +30,9 @@ int		count_c(char *s, char c)
 
 char	*remchar(char *s, char c)
 {
-	int     count;
-	int     res_count;
-	char    *res;
+	int		count;
+	int		res_count;
+	char	*res;
 
 	count = 0;
 	res_count = 0;
