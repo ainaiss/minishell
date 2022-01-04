@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 19:11:06 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 20:00:19 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,27 @@ void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 			cmd = cmd->next;
 		}
 		command = ft_check_excute(cmd, env);
-			while (cmd->files)
+		while (cmd->files)
+		{
+			if (cmd->files->type == 5)
 			{
-				if (cmd->files->type == 2 || cmd->files->type == 3)
-				{
-					cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
-					dup2(cmd->files->fd, STDOUT_FILENO);
-					close (cmd->files->fd);
-				}
-				if (cmd->files->type == 4)
-				{
-					cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
-					dup2(cmd->files->fd, STDOUT_FILENO);
-					close (cmd->files->fd);
-				}
-				cmd->files = cmd->files->next;
+					ft_here_doc(cmd);
 			}
-			//else if (cmd->files->type == 5)
-			//	ft_here_doc(cmd);
-			//dup2(cmd->files->fd, STDOUT_FILENO);
-			//close(cmd->files->fd);
+					exit(0);
+			if (cmd->files->type == 2 || cmd->files->type == 3)
+			{
+				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
+				dup2(cmd->files->fd, STDOUT_FILENO);
+				close (cmd->files->fd);
+			}
+			if (cmd->files->type == 4)
+			{
+				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
+				dup2(cmd->files->fd, STDOUT_FILENO);
+				close (cmd->files->fd);
+			}
+			cmd->files = cmd->files->next;
+		}
 		if(check_command(cmd, export) == -1)
 			execve(command, cmd->args, env);
 					close (cmd->files->fd);
