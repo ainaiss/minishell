@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/04 01:09:27 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:55:49 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **env)
 		parsing_word(command, &words);
 		cmd = parsing(&words, cmd);
 		parse_dollar_signe(cmd, &export);
-		ft_child_process(env, &pipe_, cmd, &export);
+		ft_child_process(&pipe_, cmd, &export);
 		ft_clear_list(&words);
 		ft_clear_list_cmd(cmd);
 		free(command);

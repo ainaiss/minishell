@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/04 01:16:33 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:02:31 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,20 +116,21 @@ int			ft_isdigit(int c);
 
 					/****** linked list *********/
 
-t_words		*ft_lstnew_words(void *content);
+int			ft_lstsize(t_cmd *lst);
 t_export	*ft_lstnew(void *content);
-t_files		*ft_lstnew_files(void *content);
-t_cmd		*ft_lstnew_cmd(char **content);
-void		ft_del_node(t_export *lst, char *content);
+void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list(t_words *words);
-void		ft_lstadd_back(t_export *lst, t_export *new);
+void		ft_clear_list_cmd(t_cmd *cmd);
+t_cmd		*ft_lstnew_cmd(char **content);
+t_words		*ft_lstnew_words(void *content);
+int			ft_lstsize_export(t_export *lst);
+void		ft_del_node(t_export *lst, char *content);
+t_files		*ft_lstnew_files(void *content, int type);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
+void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_words(t_words *lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
 char 		*ft_search_in_list(t_export *export , char *name);
-int			ft_lstsize(t_cmd *lst);
-void		ft_del_node_cmd(t_cmd *lst);
-void		ft_clear_list_cmd(t_cmd *cmd);
 
 /******************************** minishell *************************************************************/
 
@@ -155,11 +156,12 @@ int			check_quotes(char *command);
 						/******** parsing *******/
 
 void		open_files(t_cmd *cmd);
-void		handling_input(t_cmd *cmd);
 char		**delete_array(char **av);
+void		handling_input(t_cmd *cmd);
 char		*set_double_quotes(char *var);
-char		*get_var_value(char *variable);
 void		print_export(t_export *export);
+char		*get_var_value(char *variable);
+char		**lst_to_array(t_export *export);
 t_cmd		*parsing(t_words *words, t_cmd *cmd);
 char		*get_var(char *var, t_export *export);
 void		parsing_word(char *command, t_words *cmds);
@@ -167,18 +169,20 @@ int			check_command(t_cmd *cmd, t_export *export);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 void		environment_init(char **env, t_export *export);
 void		parse_dollar_signe(t_cmd *cmd, t_export *export);
+
 void		parsing_export_command(char *command, t_export *export);
 void		ft_export_init(char *var, t_export *export, int exec_print);
 
 						/********* EXECUTION *************/
 
 void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
-void	ft_child_process(char **env, t_pipe *pipe_, t_cmd *cmd, t_export *export);
+void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export);
 void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 char	*ft_check_excute(t_cmd *cmd, char **env);
 char	*ft_check_path(char **env);
 void	ft_replace_directory(t_export *export);
 void	replace_pwd(t_export *export);
+void	ft_here_doc(t_cmd *cmd);
 
 						/********* SIGNEL *************/
 void	sigint_handler(int sig);

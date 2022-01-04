@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 13:17:29 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/29 22:16:51 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:02:16 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cmd	*ft_lstnew_cmd(char **content)
 	return (new);
 }
 
-t_files	*ft_lstnew_files(void *content)
+t_files	*ft_lstnew_files(void *content, int type)
 {
 	t_files		*new;
 
@@ -56,6 +56,7 @@ t_files	*ft_lstnew_files(void *content)
 	if (!new)
 		return (NULL);
 	new->filename = content;
+	new->type = type;
 	new->next = NULL;
 	return (new);
 }

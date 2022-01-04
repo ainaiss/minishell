@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/03 23:24:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/04 18:54:10 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,21 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
-		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] == REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND)
+		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] == REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND || cmd->args[i][0] == HER_DOC)
 		{
+			if (cmd->args[i][0] == REDIRECTION_IN)
+				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 2));
+			else if (cmd->args[i][0] == REDIRECTION_OUT)
+				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 3));
+			else if (cmd->args[i][0] == REDIRECTION_OUT_APPEND)
+				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 4));
+			else if (cmd->args[i][0] == HER_DOC)
+				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 5));
 			i++;
-			ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i])));
-			if (cmd->args[i - 1][0] == REDIRECTION_IN)
-				cmd->files->type = 2;
-			else if (cmd->args[i - 1][0] == REDIRECTION_OUT)
-				cmd->files->type = 3;
-			else if (cmd->args[i - 1][0] == REDIRECTION_OUT_APPEND)
-				cmd->files->type = 4;
 		}
-		else if (cmd->args[i][0] == DOUBLE_QUOTES)
+		if (cmd->args[i][0] == DOUBLE_QUOTES)
 			cmd->args[i] = remchar(cmd->args[i], DOUBLE_QUOTES);
-		else if (cmd->args[i][0] == SINGLE_QUOTES)
+		if (cmd->args[i][0] == SINGLE_QUOTES)
 			cmd->args[i] = remchar(cmd->args[i], SINGLE_QUOTES);
 	}
 	cmd->args = delete_array(cmd->args);

@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_size.c                                      :+:      :+:    :+:   */
+/*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/30 21:06:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 03:23:27 by abarchil         ###   ########.fr       */
+/*   Created: 2021/12/19 09:32:41 by abarchil          #+#    #+#             */
+/*   Updated: 2022/01/04 14:53:42 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_lstsize(t_cmd *lst)
+void	environment_init(char **env, t_export *export)
 {
-	int		size;
-	t_cmd	*new;
+	int		count;
 
-	new = lst;
-	size = 0;
-	while (new)
+	count = 0;
+	export->variable = ft_strdup(env[0]);
+	export->print_exec = 1;
+	while (env[++count])
+		ft_lstadd_back(export, ft_lstnew(set_double_quotes(env[count])));
+	while (export)
 	{
-		size++;
-		new = new->next;
+		export->print_exec = 1;
+		export = export->next;
 	}
-	return (size);
-}
-
-int	ft_lstsize_export(t_export *lst)
-{
-	int		size;
-	t_export	*new;
-
-	new = lst;
-	size = 0;
-	while (new)
-	{
-		size++;
-		new = new->next;
-	}
-	return (size);
 }

@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_size.c                                      :+:      :+:    :+:   */
+/*   lst_to_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/30 21:06:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 03:23:27 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/04 02:53:04 by abarchil          #+#    #+#             */
+/*   Updated: 2022/01/04 03:37:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_lstsize(t_cmd *lst)
+char	**lst_to_array(t_export *export)
 {
-	int		size;
-	t_cmd	*new;
+	int		len;
+	int		index;
+	char	**arr;
 
-	new = lst;
-	size = 0;
-	while (new)
+	index = 0;
+	len = ft_lstsize_export(export);
+	arr = (char **)malloc(sizeof(char *) *len + 1);
+	if (!arr)
+		return (NULL);
+	while (export)
 	{
-		size++;
-		new = new->next;
+		arr[index] = ft_strdup(export->variable);
+		export = export->next;
+		index++;
 	}
-	return (size);
-}
-
-int	ft_lstsize_export(t_export *lst)
-{
-	int		size;
-	t_export	*new;
-
-	new = lst;
-	size = 0;
-	while (new)
-	{
-		size++;
-		new = new->next;
-	}
-	return (size);
+	arr[index] = NULL;
+	return (arr);
 }

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_init.c                                   :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/19 09:32:41 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 17:05:18 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/04 03:47:11 by abarchil          #+#    #+#             */
+/*   Updated: 2022/01/04 14:39:39 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	environment_init(char **env, t_export *export)
+void	ft_here_doc(t_cmd *cmd)
 {
-	int		count;
-
-	count = 0;
-	export->variable = ft_strdup(env[0]);
-	export->print_exec = 1;
-	while (env[++count])
-		ft_lstadd_back(export, ft_lstnew(set_double_quotes(env[count])));
-	while (export)
+	char	*tmp;
+	char	*buffer;
+	buffer = calloc(1, 1);
+	while (TRUE)
 	{
-		export->print_exec = 1;
-		export = export->next;
+		write(1, "here_doc> ", 11);
+		tmp = get_next_line(0);
+		if (!ft_memcmp(tmp, cmd->files->filename, ft_strlen(cmd->files->filename)))
+		{
+			write (1, buffer, ft_strlen(buffer));
+			break ;
+		}
+		buffer = ft_strjoin(buffer, tmp);
 	}
+	free(buffer);
+	buffer = NULL;
 }
