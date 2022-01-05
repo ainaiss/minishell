@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollar_signe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/30 01:04:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 03:29:55 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/05 07:16:06 by fel-boua          #+#    #+#             */
+/*   Updated: 2022/01/05 08:50:50 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 char	*get_var(char *var, t_export *export)
 {
 	while (export)
 	{
 		if (!ft_memcmp(export->variable, var, ft_strlen(var)))
-			return(export->variable);
+			return (export->variable);
 		export = export->next;
 	}
 	return (NULL);
@@ -58,18 +57,24 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 				if (cmd->args[index][count] == DOLLAR_SIGNE)
 				{
 					tmp = count;
-					while (cmd->args[index][count] && cmd->args[index][count] != ' ')
+					while (cmd->args[index][count] &&
+					cmd->args[index][count] != ' ')
 						count++;
-					var = get_var(ft_substr(cmd->args[index], tmp + 1, count - tmp - 1), export);
+					var = get_var(ft_substr(cmd->args[index], tmp + 1,
+								count - tmp - 1), export);
 					if (!var)
 					{
 						cmd->args[index] = ft_substr(cmd->args[index], 0, tmp);
-						break;
+						break ;
 					}
-					tmp_arg = remchar(ft_strjoin(ft_substr(cmd->args[index], 0, tmp), get_var_value(var)), '\"');
+					tmp_arg = remchar(ft_strjoin(ft_substr
+								(cmd->args[index], 0, tmp),
+								get_var_value(var)), '\"');
 					free(var);
 					var = NULL;
-					cmd->args[index] = ft_strjoin(tmp_arg, ft_substr(cmd->args[index], count, ft_strlen(cmd->args[index])));
+					cmd->args[index] = ft_strjoin(tmp_arg, ft_substr
+							(cmd->args[index], count,
+								ft_strlen(cmd->args[index])));
 					free(tmp_arg);
 					tmp_arg = NULL;
 				}

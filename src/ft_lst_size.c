@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 21:06:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 03:23:27 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 07:18:32 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_lstsize(t_cmd *lst)
 
 int	ft_lstsize_export(t_export *lst)
 {
-	int		size;
+	int			size;
 	t_export	*new;
 
 	new = lst;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/23 06:07:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 06:36:59 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/05 07:15:57 by fel-boua          #+#    #+#             */
+/*   Updated: 2022/01/05 08:26:22 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	parsing_word(char *command, t_words *cmds)
 		last_index = count;
 		while (command[count] && command[count] != PIPE)
 			count++;
-		ft_lstadd_back_words(&cmds, ft_lstnew_words(ft_substr(command, last_index, count - last_index)));
+		ft_lstadd_back_words(&cmds,
+			ft_lstnew_words(ft_substr
+				(command, last_index, count - last_index)));
 		count++;
 	}
 }
@@ -49,16 +51,23 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
-		if (cmd->args[i][0] == REDIRECTION_IN || cmd->args[i][0] == REDIRECTION_OUT || cmd->args[i][0] == REDIRECTION_OUT_APPEND || cmd->args[i][0] == HER_DOC)
+		if (cmd->args[i][0] == REDIRECTION_IN
+			|| cmd->args[i][0] == REDIRECTION_OUT
+			|| cmd->args[i][0] == REDIRECTION_OUT_APPEND
+			|| cmd->args[i][0] == HER_DOC)
 		{
 			if (cmd->args[i][0] == REDIRECTION_IN)
-				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 2));
+				ft_lstadd_back_file(&cmd->files,
+					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 2));
 			else if (cmd->args[i][0] == REDIRECTION_OUT)
-				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 3));
+				ft_lstadd_back_file(&cmd->files,
+					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 3));
 			else if (cmd->args[i][0] == REDIRECTION_OUT_APPEND)
-				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 4));
+				ft_lstadd_back_file(&cmd->files,
+					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 4));
 			else if (cmd->args[i][0] == HER_DOC)
-				ft_lstadd_back_file(&cmd->files, ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 5));
+				ft_lstadd_back_file(&cmd->files,
+					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 5));
 			i++;
 		}
 		if (cmd->args[i][0] == DOUBLE_QUOTES)
@@ -93,9 +102,9 @@ char	**delete_array(char **av)
 		return (NULL);
 	while (av[index])
 	{
-		if ((av[index][0] < 0 && av[index][0] > -6)&& av[index + 2])
+		if ((av[index][0] < 0 && av[index][0] > -6) && av[index + 2])
 			index += 2;
-		else if ((av[index][0] < 0 && av[index][0] > -6 ) && !av[index + 2])
+		else if ((av[index][0] < 0 && av[index][0] > -6) && !av[index + 2])
 			break ;
 		else
 		{

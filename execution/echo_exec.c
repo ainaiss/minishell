@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 05:27:02 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 02:48:33 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:49:15 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ft_echo(t_cmd *cmd)
+int	ft_echo(t_cmd *cmd)
 {
 	int		index;
 	int		new_line;

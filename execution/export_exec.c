@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 15:24:09 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 03:28:22 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:39:29 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ char	*set_double_quotes(char *var)
 		finall_var[index++] = var[count++];
 	finall_var[index] = '\"';
 	finall_var[index + 1] = '\0';
-	return(finall_var);
+	return (finall_var);
 }
 
 void	ft_export_init(char *var, t_export *export, int exec_print)
 {
 	t_export	*new;
+
 	new = ft_lstnew(set_double_quotes(var));
 	if (exec_print == 1)
 		new->print_exec = 1;
@@ -58,7 +59,7 @@ void	print_export(t_export *export)
 	}
 }
 
-int		ft_export(t_cmd *cmd, t_export *export)
+int	ft_export(t_cmd *cmd, t_export *export)
 {
 	int		i;
 

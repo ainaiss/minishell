@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:23:01 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 02:49:12 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:37:10 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ft_pwd(t_cmd *cmd, t_export *export)
+int	ft_pwd(t_cmd *cmd, t_export *export)
 {
 	char	*buf;
 
@@ -25,7 +25,7 @@ int		ft_pwd(t_cmd *cmd, t_export *export)
 	while (export)
 	{
 		if (!ft_memcmp(export->variable, "PWD=", 4))
-			break;
+			break ;
 		export = export->next;
 	}
 	ft_putstr_fd(remchar(&export->variable[4], '\"'), 1);

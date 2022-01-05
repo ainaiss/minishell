@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:29:07 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/01 17:53:03 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:36:32 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ft_unset(t_cmd *cmd, t_export *export)
+int	ft_unset(t_cmd *cmd, t_export *export)
 {
 	int		i;
 

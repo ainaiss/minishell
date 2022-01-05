@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 04:05:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:21:23 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_files
 
 }	t_files;
 
-typedef struct		s_cmd
+typedef struct s_cmd
 {
 	char				*command;
 	int					red_pipe;
@@ -84,7 +84,7 @@ typedef struct s_pipe
 	int		pipefd[2];
 }	t_pipe;
 
-/************************************** SOURCES *******************************************************/
+/**************** SOURCES ***************/
 
 void		ft_bzero(void *s, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
@@ -105,7 +105,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strtrim(char const *s1, char const *set);
 int			ft_strchr_index(char *s, int c);
-char   		*remchar(char *s, char c);
+char		*remchar(char *s, char c);
 int			ft_isalpha(int c);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_substr(char const *s, size_t start, size_t len);
@@ -115,7 +115,7 @@ void		ft_free_2d(char **av);
 int			ft_isdigit(int c);
 char		*ft_itoa(int n);
 
-					/****** linked list *********/
+/****** linked list *********/
 
 int			ft_lstsize(t_cmd *lst);
 t_export	*ft_lstnew(void *content);
@@ -131,21 +131,21 @@ void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back(t_export *lst, t_export *new);
 void		ft_lstadd_back_words(t_words **lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
-char 		*ft_search_in_list(t_export *export , char *name);
+char		*ft_search_in_list(t_export *export, char *name);
 
-/******************************** minishell *************************************************************/
+/************* minishell *****************/
 
-						/******** builtins *******/
+/******** builtins *******/
 
-int		ft_pwd(t_cmd *cmd, t_export *export);
-int		ft_cd(t_cmd *cmd, t_export *export);
-int		ft_echo(t_cmd *cmd);
-int		ft_exit(t_cmd *cmd);
-int		ft_export(t_cmd *cmd, t_export *export);
-int		ft_unset(t_cmd *cmd, t_export *export);
-int		ft_env(t_export *export);
+int			ft_pwd(t_cmd *cmd, t_export *export);
+int			ft_cd(t_cmd *cmd, t_export *export);
+int			ft_echo(t_cmd *cmd);
+int			ft_exit(t_cmd *cmd);
+int			ft_export(t_cmd *cmd, t_export *export);
+int			ft_unset(t_cmd *cmd, t_export *export);
+int			ft_env(t_export *export);
 
-						/********** lixing **********/
+/********** lixing **********/
 
 char		*lexing(char *command, int **lampe);
 int			check_lexing_syntax(char *command);
@@ -154,7 +154,7 @@ int			lexing_first_char(char *command);
 int			lexing_last_char(char *command);
 int			check_quotes(char *command);
 
-						/******** parsing *******/
+/******** parsing *******/
 
 void		open_files(t_cmd *cmd);
 char		**delete_array(char **av);
@@ -170,25 +170,22 @@ int			check_command(t_cmd *cmd, t_export *export);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 void		environment_init(char **env, t_export *export);
 void		parse_dollar_signe(t_cmd *cmd, t_export *export);
-
 void		parsing_export_command(char *command, t_export *export);
 void		ft_export_init(char *var, t_export *export, int exec_print);
 
-						/********* EXECUTION *************/
+/********* EXECUTION *************/
 
-void	ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
-void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export);
-void	ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
-char	*ft_check_excute(t_cmd *cmd, char **env);
-char	*ft_check_path(char **env);
-void	ft_replace_directory(t_export *export);
-void	replace_pwd(t_export *export);
-void	ft_here_doc(t_cmd *cmd);
+void		ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
+void		ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export);
+void		ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
+char		*ft_check_excute(t_cmd *cmd, char **env);
+char		*ft_check_path(char **env);
+void		ft_replace_directory(t_export *export);
+void		replace_pwd(t_export *export);
+void		ft_here_doc(t_cmd *cmd);
 
-						/********* SIGNEL *************/
-void	sigint_handler(int sig);
-void	signals(void);
-					/******** temporary_functions *******/
+/********* SIGNEL *************/
+void		sigint_handler(int sig);
+void		signals(void);
 
-void	put_lexing(char *command);
 #endif

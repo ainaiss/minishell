@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_to_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 02:53:04 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 03:18:00 by abarchil         ###   ########.fr       */
+/*   Created: 2022/01/05 07:17:17 by fel-boua          #+#    #+#             */
+/*   Updated: 2022/01/05 08:35:32 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**lst_to_array(t_export *export)
 	index = 0;
 	new = export;
 	len = ft_lstsize_export(export);
-	arr = (char **)malloc(sizeof(char *) *len + 1);
+	arr = (char **)malloc(sizeof(char *) * len + 1);
 	if (!arr)
 		return (NULL);
 	while (new)

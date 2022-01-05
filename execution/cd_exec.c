@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 03:35:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 08:44:03 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void	replace_pwd(t_export *export)
 	{
 		free(tmp->variable);
 		tmp->variable = NULL;
-		tmp->variable = ft_strjoin("OLDPWD", ft_substr(var, 3, ft_strlen(var) - 3));
+		tmp->variable = ft_strjoin("OLDPWD",
+				ft_substr(var, 3, ft_strlen(var) - 3));
 	}
 }
 
-char 	*ft_search_in_list(t_export *export , char *name)
+char	*ft_search_in_list(t_export *export, char *name)
 {
 	t_export	*temp;
 
@@ -63,12 +64,13 @@ void	ft_replace_directory(t_export *export)
 	free(new_dir);
 }
 
-int		ft_cd(t_cmd *cmd, t_export *export)
+int	ft_cd(t_cmd *cmd, t_export *export)
 {
 	char	*dir;
 	char	*tmp;
 
-	if (!cmd->args[1] || (cmd->args[1][0] == '~' &&  ft_strlen(cmd->args[1]) == 1))
+	if (!cmd->args[1] || (cmd->args[1][0] == '~'
+		&& ft_strlen(cmd->args[1]) == 1))
 	{
 		tmp = ft_search_in_list(export, "HOME");
 		if (!tmp)
@@ -77,7 +79,7 @@ int		ft_cd(t_cmd *cmd, t_export *export)
 	}
 	else if (cmd->args[1][0] == '-')
 	{
-		tmp = ft_search_in_list(export , "OLDPWD");
+		tmp = ft_search_in_list(export, "OLDPWD");
 		if (!tmp)
 			ft_putstr_fd("OLDPWD not found\n", 2);
 		dir = &tmp[7];
