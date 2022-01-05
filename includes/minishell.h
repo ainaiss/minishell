@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:21:23 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:14:58 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ char		*get_var_value(char *variable);
 char		**lst_to_array(t_export *export);
 t_cmd		*parsing(t_words *words, t_cmd *cmd);
 char		*get_var(char *var, t_export *export);
-void		parsing_word(char *command, t_words *cmds);
+t_words		*parsing_word(char *command, t_words *cmds);
 int			check_command(t_cmd *cmd, t_export *export);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 void		environment_init(char **env, t_export *export);

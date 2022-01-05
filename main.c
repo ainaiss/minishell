@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:47:14 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:16:06 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **env)
 		command = lexing(command, &lampe);
 		if (check_lexing_syntax(command) == -1)
 			continue ;
-		parsing_word(command, words);
+		words = parsing_word(command, words);
 		cmd = parsing(words, cmd);
 		parse_dollar_signe(cmd, &export);
 		ft_child_process(&pipe_, cmd, &export);

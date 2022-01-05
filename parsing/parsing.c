@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:15:57 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:26:22 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/05 17:16:42 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parsing_word(char *command, t_words *cmds)
+t_words	*parsing_word(char *command, t_words *cmds)
 {
 	int		count;
 	int		last_index;
@@ -29,6 +29,7 @@ void	parsing_word(char *command, t_words *cmds)
 				(command, last_index, count - last_index)));
 		count++;
 	}
+	return (cmds);
 }
 
 t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
