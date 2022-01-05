@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 01:19:01 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 03:35:28 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		ft_cd(t_cmd *cmd, t_export *export)
 		tmp = ft_search_in_list(export, "HOME");
 		if (!tmp)
 			ft_putstr_fd("HOME not found\n", 2);
-		dir = &tmp[5];
+		dir = remchar(&tmp[5], '\"');
 	}
 	else if (cmd->args[1][0] == '-')
 	{

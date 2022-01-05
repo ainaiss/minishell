@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/04 19:44:44 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 04:05:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int			ft_atoi(const char *str);
 char		*ft_strndup(const char *s, int n);
 void		ft_free_2d(char **av);
 int			ft_isdigit(int c);
+char		*ft_itoa(int n);
 
 					/****** linked list *********/
 
@@ -128,7 +129,7 @@ void		ft_del_node(t_export *lst, char *content);
 t_files		*ft_lstnew_files(void *content, int type);
 void		ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 void		ft_lstadd_back(t_export *lst, t_export *new);
-void		ft_lstadd_back_words(t_words *lst, t_words *new);
+void		ft_lstadd_back_words(t_words **lst, t_words *new);
 void		ft_lstadd_back_file(t_files **lst, t_files *new);
 char 		*ft_search_in_list(t_export *export , char *name);
 

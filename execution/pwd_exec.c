@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:23:01 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 02:25:48 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 02:49:12 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		ft_pwd(t_cmd *cmd, t_export *export)
 	ft_putstr_fd(remchar(&export->variable[4], '\"'), 1);
 	ft_putchar_fd('\n', 1);
 	free(buf);
+	buf = NULL;
 	return (0);
 }

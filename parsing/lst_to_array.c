@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 02:53:04 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 03:37:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 03:18:00 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 char	**lst_to_array(t_export *export)
 {
-	int		len;
-	int		index;
-	char	**arr;
+	int			len;
+	int			index;
+	char		**arr;
+	t_export	*new;
 
 	index = 0;
+	new = export;
 	len = ft_lstsize_export(export);
 	arr = (char **)malloc(sizeof(char *) *len + 1);
 	if (!arr)
 		return (NULL);
-	while (export)
+	while (new)
 	{
-		arr[index] = ft_strdup(export->variable);
-		export = export->next;
+		arr[index] = ft_strdup(new->variable);
+		new = new->next;
 		index++;
 	}
 	arr[index] = NULL;
+	new = NULL;
 	return (arr);
 }

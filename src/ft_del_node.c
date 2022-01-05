@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 07:47:10 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/04 01:32:07 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 02:19:29 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	ft_clear_list(t_words *words)
 {
 	t_words		*tmp;
 
+	if (!words)
+		return ;
 	if (words->next)
 		tmp = words->next;
 	else

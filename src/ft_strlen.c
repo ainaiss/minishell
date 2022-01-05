@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:27:59 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/02 02:45:12 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 02:44:23 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlen(const char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] != '\0')
+	while (s[i])
 	{
 		i++;
 	}

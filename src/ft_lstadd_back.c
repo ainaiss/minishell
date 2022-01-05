@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 17:36:07 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/31 10:52:09 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/05 05:48:12 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,31 @@ void	ft_lstadd_back_cmd(t_cmd **lst, t_cmd *new)
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		new->next = NULL;
-			tmp->next = new;
+		tmp->next = new;
 	}
 }
 
-void	ft_lstadd_back_words(t_words *lst, t_words *new)
+void	ft_lstadd_back_words(t_words **lst, t_words *new)
 {
 	t_words	*tmp;
 
-	tmp = lst;
-	if (lst == NULL)
-		lst = new;
+	tmp = *lst;
+	if (!*(new->words))
+	{
+		free(new->words);
+		return ;
+	}
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
 	else
 	{
 		while (tmp->next != NULL)
 			tmp = tmp->next;
+		new->next = NULL;
 		tmp->next = new;
-		tmp = NULL;
 	}
 }
 
