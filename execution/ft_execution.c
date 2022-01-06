@@ -6,13 +6,37 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 08:04:40 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 18:50:01 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
+{
+	char	*command;
+	char	**env;
 
-void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
+	env = lst_to_array(export);
+	pipe(pipe_->pipefd);
+	pipe_->pid = fork();
+	if (pipe_->pid == 0)
+	{
+		command = ft_check_excute(cmd, env);
+		multi_redirection(cmd);
+		close(pipe_->pipefd[R]);
+		dup2(pipe_->pipefd[W], STDOUT_FILENO);
+		if (check_command(cmd, export) == -1)
+			execve(command, cmd->args, env);
+	}
+	else
+	{
+		close(pipe_->pipefd[W]);
+		dup2(pipe_->pipefd[R], STDIN_FILENO);
+		wait(NULL);
+	}
+}
+
+void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 {
 	int		cmd_count;
 	char	*command;
@@ -24,76 +48,20 @@ void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 			|| !ft_strcmp(cmd->command, "EXIT"))
 		ft_exit(cmd);
 	if (pipe(pipe_->pipefd) == -1)
-	{
-		perror("pipe");
-		exit(EXIT_FAILURE);
-	}
+		return (perror("pipe"));
 	pipe_->pid = fork();
 	if (pipe_->pid == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
+		return (perror("fork"));
 	if (pipe_->pid == 0)
 	{
 		while(cmd_count - 1)
 		{
-			pipe(pipe_->pipefd);
-			pipe_->pid = fork();
-			if (pipe_->pid == 0)
-			{
-				command = ft_check_excute(cmd, env);
-				while (cmd->files)
-				{
-					if (cmd->files->type == 5)
-						ft_here_doc(cmd);
-					if (cmd->files->type == 2 || cmd->files->type == 3)
-					{
-						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
-						dup2(cmd->files->fd, STDOUT_FILENO);
-						close (cmd->files->fd);
-					}
-					if (cmd->files->type == 4)
-					{
-						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
-						dup2(cmd->files->fd, STDOUT_FILENO);
-						close (cmd->files->fd);
-					}
-					cmd->files = cmd->files->next;
-				}
-				close(pipe_->pipefd[R]);
-				dup2(pipe_->pipefd[W], STDOUT_FILENO);
-				if (check_command(cmd, export) == -1)
-					execve(command, cmd->args, env);
-			}
-			else
-			{
-				close(pipe_->pipefd[W]);
-				dup2(pipe_->pipefd[R], STDIN_FILENO);
-				wait(NULL);
-			}
+			execute_command(pipe_, cmd, export);
 			cmd_count--;
 			cmd = cmd->next;
 		}
 		command = ft_check_excute(cmd, env);
-		while (cmd->files)
-		{
-			if (cmd->files->type == 5)
-					ft_here_doc(cmd);
-			if (cmd->files->type == 2 || cmd->files->type == 3)
-			{
-				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
-				dup2(cmd->files->fd, STDOUT_FILENO);
-				close (cmd->files->fd);
-			}
-			if (cmd->files->type == 4)
-			{
-				cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
-				dup2(cmd->files->fd, STDOUT_FILENO);
-				close (cmd->files->fd);
-			}
-			cmd->files = cmd->files->next;
-		}
+		multi_redirection(cmd);
 		if(check_command(cmd, export) == -1)
 			execve(command, cmd->args, env);
 		close (cmd->files->fd);

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/06 07:52:15 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 08:48:45 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,9 @@ int			lexing_last_char(char *command);
 int			check_quotes(char *command);
 
 /******** parsing *******/
+
 void		multi_redirection(t_cmd *cmd);
-// void		open_files(t_cmd *cmd);
+int			red_in(t_cmd *cmd);
 char		**delete_array(char **av);
 void		handling_input(t_cmd *cmd);
 char		*set_double_quotes(char *var);
@@ -176,8 +177,8 @@ void		ft_export_init(char *var, t_export *export, int exec_print);
 
 /********* EXECUTION *************/
 
-void		ft_execution(char **env, t_pipe *pipe_, t_cmd *cmd);
-void		ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export);
+void		ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export);
+void		execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export);
 void		ft_one_command(char **env, t_pipe *pipe_, t_cmd *cmd);
 char		*ft_check_excute(t_cmd *cmd, char **env);
 char		*ft_check_path(char **env);

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:06 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/06 07:41:23 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 09:21:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 			var = remchar(get_var_value(get_var(&cmd->args[index][count + 1], export)), '\"');
 			if (!var)
 			{
-				cmd->args[index] = NULL; 	//leak
+				cmd->args[index] = NULL;
 				return (free(tmp_arg));
 			}
 			free(cmd->args[index]);
