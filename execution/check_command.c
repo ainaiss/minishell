@@ -6,14 +6,15 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 01:16:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 07:59:58 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 19:19:01 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_command(t_cmd *cmd, t_export *export)
+int	check_command(t_cmd *cmd, t_export *export, t_pipe *pipe_)
 {
+	(void)pipe_;
 	if (cmd->command)
 	{
 		multi_redirection(cmd);

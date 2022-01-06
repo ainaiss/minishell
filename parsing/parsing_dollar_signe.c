@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:06 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/06 09:21:41 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 19:53:17 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,24 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 		while (cmd->args[++index])
 		{
 			count = 0;
-			while (cmd->args[index][count] && cmd->args[index][count] != DOLLAR_SIGNE)
-				count++;
-			if (!cmd->args[index][count])
-				return;
-			tmp_arg = ft_substr(cmd->args[index], 0, count);
-			var = remchar(get_var_value(get_var(&cmd->args[index][count + 1], export)), '\"');
-			if (!var)
+			if (ft_strchr(cmd->args[index], DOLLAR_SIGNE))
 			{
-				cmd->args[index] = NULL;
-				return (free(tmp_arg));
+				while (cmd->args[index][count] && cmd->args[index][count] != DOLLAR_SIGNE)
+					count++;
+				if (!cmd->args[index][count])
+					return;
+				tmp_arg = ft_substr(cmd->args[index], 0, count);
+				var = remchar(get_var_value(get_var(&cmd->args[index][count + 1], export)), '\"');
+				if (!var)
+				{
+					cmd->args[index] = NULL;
+					return (free(tmp_arg));
+				}
+				free(cmd->args[index]);
+				cmd->args[index] = ft_strjoin(tmp_arg, var);
+				free(tmp_arg);
+				free(var);
 			}
-			free(cmd->args[index]);
-			cmd->args[index] = ft_strjoin(tmp_arg, var);
-			free(tmp_arg);
-			free(var);
 		}
 		cmd = cmd->next;
 	}

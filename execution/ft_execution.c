@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 18:50:01 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 19:47:15 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,24 @@ void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 	pipe_->pid = fork();
 	if (pipe_->pid == 0)
 	{
-		command = ft_check_excute(cmd, env);
-		multi_redirection(cmd);
 		close(pipe_->pipefd[R]);
+		command = ft_check_excute(cmd, env);
+		if (!command)
+		{
+			printf("minishell: %s: command not found\n", cmd->command);
+			exit(127);
+		}
+		multi_redirection(cmd);		
 		dup2(pipe_->pipefd[W], STDOUT_FILENO);
-		if (check_command(cmd, export) == -1)
+		close(pipe_->pipefd[W]);
+		if (check_command(cmd, export, pipe_) == -1)
 			execve(command, cmd->args, env);
 	}
 	else
 	{
+		wait(NULL);
 		close(pipe_->pipefd[W]);
 		dup2(pipe_->pipefd[R], STDIN_FILENO);
-		wait(NULL);
 	}
 }
 
@@ -61,8 +67,13 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 			cmd = cmd->next;
 		}
 		command = ft_check_excute(cmd, env);
+		if (!command)
+		{
+			printf("minishell: %s: command not found\n", cmd->command);
+			exit(127);
+		}
 		multi_redirection(cmd);
-		if(check_command(cmd, export) == -1)
+		if(check_command(cmd, export, pipe_) == -1)
 			execve(command, cmd->args, env);
 		close (cmd->files->fd);
 		free(command);
@@ -116,7 +127,6 @@ char	*ft_check_excute(t_cmd *cmd, char **env)
 		finall_path = NULL;
 		i++;
 	}
-	printf("minishell: %s: command not found\n", cmd->command);
 	free(splited_path);
 	splited_path = NULL;
 	return (NULL);
