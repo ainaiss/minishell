@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 17:49:37 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 08:04:40 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 
 	env = lst_to_array(export);
 	cmd_count = ft_lstsize(cmd);
+	if (!ft_strcmp(cmd->command, "exit")
+			|| !ft_strcmp(cmd->command, "EXIT"))
+		ft_exit(cmd);
 	if (pipe(pipe_->pipefd) == -1)
 	{
 		perror("pipe");
@@ -40,14 +43,23 @@ void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 			if (pipe_->pid == 0)
 			{
 				command = ft_check_excute(cmd, env);
-				if (cmd->files)
+				while (cmd->files)
 				{
+					if (cmd->files->type == 5)
+						ft_here_doc(cmd);
 					if (cmd->files->type == 2 || cmd->files->type == 3)
+					{
 						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0644);
-					else if (cmd->files->type == 4)
+						dup2(cmd->files->fd, STDOUT_FILENO);
+						close (cmd->files->fd);
+					}
+					if (cmd->files->type == 4)
+					{
 						cmd->files->fd = open(cmd->files->filename, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY, 0644);
-					dup2( cmd->files->fd, STDOUT_FILENO);
-					close(cmd->files->fd);
+						dup2(cmd->files->fd, STDOUT_FILENO);
+						close (cmd->files->fd);
+					}
+					cmd->files = cmd->files->next;
 				}
 				close(pipe_->pipefd[R]);
 				dup2(pipe_->pipefd[W], STDOUT_FILENO);
@@ -87,8 +99,8 @@ void	ft_child_process(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 		close (cmd->files->fd);
 		free(command);
 	}
-		else
-			waitpid(-1, NULL, 0);
+	else
+		waitpid(-1, NULL, 0);
 }
 
 char	*ft_check_path(char **env)
@@ -115,7 +127,8 @@ char	*ft_check_excute(t_cmd *cmd, char **env)
 	char	**splited_path;
 	char	*tmp;
 	char	*finall_path;
-
+	if (ft_strchr(cmd->command, '/'))
+		return(cmd->command);
 	splited_path = ft_split(ft_check_path(env), ':');
 	i = 0;
 	while (splited_path[i])
@@ -128,12 +141,14 @@ char	*ft_check_excute(t_cmd *cmd, char **env)
 		if (access(finall_path, X_OK | F_OK) == 0)
 		{
 			free(splited_path);
+			//free 2D array;
 			return (finall_path);
 		}
 		free(finall_path);
 		finall_path = NULL;
 		i++;
 	}
+	printf("minishell: %s: command not found\n", cmd->command);
 	free(splited_path);
 	splited_path = NULL;
 	return (NULL);

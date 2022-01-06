@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 01:16:48 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:41:44 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:59:58 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	check_command(t_cmd *cmd, t_export *export)
 {
 	if (cmd->command)
 	{
+		multi_redirection(cmd);
 		if (!ft_strcmp(cmd->command, "echo")
 			|| !ft_strcmp(cmd->command, "ECHO"))
 			return (ft_echo(cmd));
@@ -24,7 +25,7 @@ int	check_command(t_cmd *cmd, t_export *export)
 			return (ft_pwd(cmd, export));
 		else if (!ft_strcmp(cmd->command, "exit")
 			|| !ft_strcmp(cmd->command, "EXIT"))
-			return (ft_exit(cmd));
+				return (ft_exit(cmd));
 		else if (!ft_strcmp(cmd->command, "cd")
 			|| !ft_strcmp(cmd->command, "CD"))
 			return (ft_cd(cmd, export));

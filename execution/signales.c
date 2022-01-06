@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signales.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 23:43:22 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:36:50 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 03:59:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 void	sigint_handler(int sig)
 {
 	(void) sig;
@@ -21,8 +20,15 @@ void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
+void	sigquit_handler(int sig)
+{
+	(void)sig;
+	if (g_is_runnig)
+		exit(131);
+}
+
 void	signals(void)
 {
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sigquit_handler);
 }

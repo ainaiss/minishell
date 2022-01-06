@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 07:58:13 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:51:13 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:13:23 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,13 @@ int	ft_isnumber(char *number)
 
 int	ft_exit(t_cmd *cmd)
 {
-	if (!cmd)
+	if (!cmd || ft_strlen_2d(cmd->args) == 1)
 	{
 		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
 	if (ft_strlen_2d(cmd->args) > 2)
 		ft_putstr_fd("exit: too many arguments\n", 1);
-	else if (ft_strlen_2d(cmd->args) == 1)
-		exit(0);
 	else if (!ft_isnumber(cmd->args[1]))
 	{
 		printf("exit: %s: numeric argument required\n", cmd->args[1]);

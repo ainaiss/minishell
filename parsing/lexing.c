@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:33 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:28:37 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/05 22:07:59 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int	lexing_last_char(char *command)
 	size = ft_strlen(command) - 1;
 	while (command[size] == DELIMITER)
 		size--;
-	if (command[size] < 0 && command[size] != DELIMITER
-		&& command[size] != DOUBLE_QUOTES && command[size] != SINGLE_QUOTES)
+	if (command[size] < 0 && command[size] > -6)
 	{
 		printf("parse error near \'\\n\'\n");
 		return (0);

@@ -6,7 +6,7 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2022/01/04 21:56:09 by abarchil         ###   ########.fr        #
+#    Updated: 2022/01/06 07:52:58 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_FILE = main.c src/ft_strjoin.c src/ft_memcmp.c src/ft_split.c execution/expo
 	parsing/parsing_dollar_signe.c src/ft_free_2d.c execution/ft_execution.c src/ft_lst_size.c \
 	execution/echo_exec.c src/ft_isdigit.c execution/exit_exec.c src/ft_atoi.c execution/cd_exec.c \
 	execution/unset_exec.c execution/env_exec.c execution/check_command.c parsing/files_handller.c \
-	execution/signales.c parsing/lst_to_array.c execution/here_doc.c src/ft_itoa.c
+	execution/signales.c parsing/lst_to_array.c execution/here_doc.c src/ft_itoa.c execution/multi_redirection.c
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 
@@ -35,7 +35,7 @@ CYAN = \033[0;36m
 
 YELLOW = \033[0;33m
 
-CFLAGS = -Wall -Werror -Wextra -ggdb
+CFLAGS = -Wall -Werror -Wextra
 
 all : $(NAME)
 	@echo "$(RED) \

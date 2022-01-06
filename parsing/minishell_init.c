@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:18 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:34:23 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:15:10 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	environment_init(char **env, t_export *export)
 	export->variable = ft_strdup(env[0]);
 	export->print_exec = 1;
 	while (env[++count])
-		ft_lstadd_back(export, ft_lstnew(set_double_quotes(env[count])));
+		ft_lstadd_back(export, ft_lstnew(env[count]));
 	while (export)
 	{
 		export->print_exec = 1;

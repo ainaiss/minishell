@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollar_signe.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:06 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 08:50:50 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:41:23 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*get_var_value(char *variable)
 		return (NULL);
 	while (variable[index] && variable[index] != '=')
 		index++;
+	if (!variable[index])
+		return (NULL);
 	index++;
 	return (ft_substr(variable, index, ft_strlen(variable) - index));
 }
@@ -40,7 +42,6 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 {
 	int		index;
 	int		count;
-	int		tmp;
 	char	*var;
 	char	*tmp_arg;
 
@@ -50,36 +51,22 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 	{
 		while (cmd->args[++index])
 		{
-			cmd->args[index] = remchar(cmd->args[index], DOUBLE_QUOTES);
 			count = 0;
-			while (cmd->args[index][count])
-			{
-				if (cmd->args[index][count] == DOLLAR_SIGNE)
-				{
-					tmp = count;
-					while (cmd->args[index][count] &&
-					cmd->args[index][count] != ' ')
-						count++;
-					var = get_var(ft_substr(cmd->args[index], tmp + 1,
-								count - tmp - 1), export);
-					if (!var)
-					{
-						cmd->args[index] = ft_substr(cmd->args[index], 0, tmp);
-						break ;
-					}
-					tmp_arg = remchar(ft_strjoin(ft_substr
-								(cmd->args[index], 0, tmp),
-								get_var_value(var)), '\"');
-					free(var);
-					var = NULL;
-					cmd->args[index] = ft_strjoin(tmp_arg, ft_substr
-							(cmd->args[index], count,
-								ft_strlen(cmd->args[index])));
-					free(tmp_arg);
-					tmp_arg = NULL;
-				}
+			while (cmd->args[index][count] && cmd->args[index][count] != DOLLAR_SIGNE)
 				count++;
+			if (!cmd->args[index][count])
+				return;
+			tmp_arg = ft_substr(cmd->args[index], 0, count);
+			var = remchar(get_var_value(get_var(&cmd->args[index][count + 1], export)), '\"');
+			if (!var)
+			{
+				cmd->args[index] = NULL; 	//leak
+				return (free(tmp_arg));
 			}
+			free(cmd->args[index]);
+			cmd->args[index] = ft_strjoin(tmp_arg, var);
+			free(tmp_arg);
+			free(var);
 		}
 		cmd = cmd->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 17:14:58 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:52:15 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@
 # define DELIMITER -7
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
-# define BACK_SLASH -10
+
+int	g_is_runnig;
 
 typedef struct t_export
 {
@@ -155,8 +156,8 @@ int			lexing_last_char(char *command);
 int			check_quotes(char *command);
 
 /******** parsing *******/
-
-void		open_files(t_cmd *cmd);
+void		multi_redirection(t_cmd *cmd);
+// void		open_files(t_cmd *cmd);
 char		**delete_array(char **av);
 void		handling_input(t_cmd *cmd);
 char		*set_double_quotes(char *var);

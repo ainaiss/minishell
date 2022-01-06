@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 15:24:09 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:39:29 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:33:26 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*set_double_quotes(char *var)
 		finall_var[index++] = var[count++];
 	finall_var[index] = '\"';
 	finall_var[index + 1] = '\0';
+	// free var
 	return (finall_var);
 }
 
@@ -40,7 +41,7 @@ void	ft_export_init(char *var, t_export *export, int exec_print)
 {
 	t_export	*new;
 
-	new = ft_lstnew(set_double_quotes(var));
+	new = ft_lstnew(var);
 	if (exec_print == 1)
 		new->print_exec = 1;
 	else
@@ -53,7 +54,7 @@ void	print_export(t_export *export)
 	while (export)
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(export->variable, 1);
+		ft_putstr_fd(set_double_quotes(export->variable), 1);
 		ft_putchar_fd('\n', 1);
 		export = export->next;
 	}

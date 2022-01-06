@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:17:51 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 07:17:54 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:40:56 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_del_node(t_export *lst, char *content)
 		{
 			lst->next = lst->next->next;
 			free(tmp->variable);
+			tmp->variable = NULL;
 			free(tmp);
 			tmp->next = NULL;
 			tmp = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:44:03 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 07:43:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@ void	replace_pwd(t_export *export)
 		tmp = tmp->next;
 	}
 	if (tmp->variable)
-	{
-		free(tmp->variable);
-		tmp->variable = NULL;
-		tmp->variable = ft_strjoin("OLDPWD",
+		tmp->variable = ft_strjoin("OLDPWD", \
 				ft_substr(var, 3, ft_strlen(var) - 3));
-	}
 }
 
 char	*ft_search_in_list(t_export *export, char *name)
@@ -59,7 +55,6 @@ void	ft_replace_directory(t_export *export)
 			break ;
 		export = export->next;
 	}
-	free(export->variable);
 	export->variable = ft_strjoin("PWD=", new_dir);
 	free(new_dir);
 }
