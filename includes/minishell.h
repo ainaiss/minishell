@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/06 18:56:18 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 04:13:28 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
 
-int	g_is_runnig;
+typedef struct s_tools
+{
+	int		is_runnig;
+	int		exit_status;
+	char	*command;
+}	t_tools;
+
+t_tools	g_tools;
 
 typedef struct t_export
 {
@@ -154,9 +161,15 @@ int			checke_near_token(char *command);
 int			lexing_first_char(char *command);
 int			lexing_last_char(char *command);
 int			check_quotes(char *command);
+void		lexing_2(char *command, int count, int **lampe);
+void		set_db_quotes(char *command, int **lampe, int count);
+void		set_sb_quotes(char *command, int **lampe, int count);
+void		set_here_doc_quotes(char *command, int count);
+void		set_ro_app_quotes(char *command, int count);
 
 /******** parsing *******/
 
+int			check_if_builting(char *command);
 void		multi_redirection(t_cmd *cmd);
 int			red_in(t_cmd *cmd);
 char		**delete_array(char **av);
@@ -168,7 +181,9 @@ char		**lst_to_array(t_export *export);
 t_cmd		*parsing(t_words *words, t_cmd *cmd);
 char		*get_var(char *var, t_export *export);
 t_words		*parsing_word(char *command, t_words *cmds);
-int			check_command(t_cmd *cmd, t_export *export, t_pipe *pipe_);
+int			check_command(t_cmd *cmd, t_export *export);
+void		check_command_error(t_cmd *cmd, t_export *export,
+				char *command, char **env);
 t_cmd		*parse_commands(t_words *words, t_cmd *cmd);
 void		environment_init(char **env, t_export *export);
 void		parse_dollar_signe(t_cmd *cmd, t_export *export);

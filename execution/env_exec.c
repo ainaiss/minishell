@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:59:42 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:40:27 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/06 21:54:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ft_env(t_export *export)
 		else
 			export = export->next;
 	}
-	return (0);
+	exit(0);
 }

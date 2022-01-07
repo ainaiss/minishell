@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:29:07 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 07:25:21 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/06 21:54:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_unset(t_cmd *cmd, t_export *export)
 	if (!cmd->args[1])
 	{
 		ft_putstr_fd("unset: not enough arguments\n", 2);
-		return (1);
+		exit(1);
 	}
 	else
 	{
 		while (cmd->args[++i])
 			ft_del_node(export, cmd->args[i]);
-		return (0);
+		exit(0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:33 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 22:07:59 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 03:31:38 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,17 @@ char	*lexing(char *command, int **lampe)
 		else if (command[count] == '>' && command[count + 1] == '>'
 			&& !lampe[0][1] && !lampe[0][2])
 		{
-				command[count] = REDIRECTION_OUT_APPEND;
-				command[count + 1] = REDIRECTION_OUT_APPEND;
-				count++;
+			set_ro_app_quotes(command, count);
+			count++;
 		}
 		else if (command[count] == '<' && command[count + 1] == '<'
 			&& !lampe[0][1] && !lampe[0][2])
 		{
-			command[count] = HER_DOC;
-			command[count + 1] = HER_DOC;
+			set_here_doc_quotes(command, count);
 			count++;
 		}
-		else if (command[count] == '>' && !lampe[0][1] && !lampe[0][2])
-			command[count] = REDIRECTION_OUT;
-		else if (command[count] == '<' && !lampe[0][1] && !lampe[0][2])
-			command[count] = REDIRECTION_IN;
-		else if ((command[count] == '$' && !lampe[0][1]) ||
-			(command[count] == '$' && !lampe[0][1] && !lampe[0][2]))
-			command[count] = DOLLAR_SIGNE;
-		else if (command[count] == ' ' && !lampe[0][1] && !lampe[0][2])
-			command[count] = DELIMITER;
-		else if (command[count] == '\"')
-		{
-			if (lampe[0][2] == 1)
-				lampe[0][2] = 0;
-			else
-				lampe[0][2] = 1;
-			command[count] = DOUBLE_QUOTES;
-		}
-		else if (command[count] == '\'')
-		{
-			if (lampe[0][1] == 1)
-				lampe[0][1] = 0;
-			else
-				lampe[0][1] = 1;
-			command[count] = SINGLE_QUOTES;
-		}
+		else
+			lexing_2(command, count, lampe);
 		count++;
 	}
 	return (command);
@@ -102,9 +77,7 @@ int	check_lexing_syntax(char *command)
 
 	count = 0;
 	checker = 0;
-	if (!lexing_first_char(command))
-		return (-1);
-	else if (check_quotes(command) == 0)
+	if (!lexing_first_char(command) || !check_quotes(command))
 		return (-1);
 	while (command[count])
 	{

@@ -3,42 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   echo_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 05:27:02 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/05 08:49:15 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/07 00:45:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_echo(t_cmd *cmd)
+static void	print_args(t_cmd *cmd, int index)
 {
-	int		index;
-	int		new_line;
-
-	new_line = 0;
-	index = 0;
-	if (!cmd->args[1])
-	{
-		ft_putchar_fd('\n', 1);
-		return (0);
-	}
-	if (cmd->args[1][0] == '-' && cmd->args[1][1] == 'n')
-	{
-		new_line = 1;
-		index = 2;
-	}
-	else
-		index = 1;
-	while (cmd->args[index])
+	while (cmd->args[++index])
 	{
 		ft_putstr_fd(cmd->args[index], 1);
 		if (cmd->args[index + 1])
 			ft_putchar_fd(' ', 1);
-		index++;
 	}
+}
+
+int	ft_echo(t_cmd *cmd)
+{
+	int		new_line;
+	int		index;
+
+	new_line = 0;
+	index = -1;
+	if (!cmd->args[1])
+	{
+		ft_putchar_fd('\n', 1);
+		exit(0);
+	}
+	if (cmd->args[1][0] == '-' && cmd->args[1][1] == 'n')
+	{
+		new_line = 1;
+		index = 1;
+	}
+	else
+		index = 0;
+	print_args(cmd, index);
 	if (new_line == 0)
 		ft_putchar_fd('\n', 1);
-	return (0);
+	exit(0);
 }

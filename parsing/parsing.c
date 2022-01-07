@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:15:57 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/05 17:16:42 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 04:42:25 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,33 @@ t_words	*parsing_word(char *command, t_words *cmds)
 	return (cmds);
 }
 
+static void	cmd_init(t_cmd *cmd, int i)
+{
+	if (cmd->args[i][0] == REDIRECTION_IN
+		|| cmd->args[i][0] == REDIRECTION_OUT
+		|| cmd->args[i][0] == REDIRECTION_OUT_APPEND
+		|| cmd->args[i][0] == HER_DOC)
+	{
+		if (cmd->args[i][0] == REDIRECTION_IN)
+			ft_lstadd_back_file(&cmd->files,
+				ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 2));
+		else if (cmd->args[i][0] == REDIRECTION_OUT)
+			ft_lstadd_back_file(&cmd->files,
+				ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 3));
+		else if (cmd->args[i][0] == REDIRECTION_OUT_APPEND)
+			ft_lstadd_back_file(&cmd->files,
+				ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 4));
+		else if (cmd->args[i][0] == HER_DOC)
+			ft_lstadd_back_file(&cmd->files,
+				ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 5));
+		i++;
+	}
+	if (cmd->args[i][0] == DOUBLE_QUOTES)
+		cmd->args[i] = remchar(cmd->args[i], DOUBLE_QUOTES);
+	if (cmd->args[i][0] == SINGLE_QUOTES)
+		cmd->args[i] = remchar(cmd->args[i], SINGLE_QUOTES);
+}
+
 t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 {
 	int	i;
@@ -52,29 +79,7 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
 	{
-		if (cmd->args[i][0] == REDIRECTION_IN
-			|| cmd->args[i][0] == REDIRECTION_OUT
-			|| cmd->args[i][0] == REDIRECTION_OUT_APPEND
-			|| cmd->args[i][0] == HER_DOC)
-		{
-			if (cmd->args[i][0] == REDIRECTION_IN)
-				ft_lstadd_back_file(&cmd->files,
-					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 2));
-			else if (cmd->args[i][0] == REDIRECTION_OUT)
-				ft_lstadd_back_file(&cmd->files,
-					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 3));
-			else if (cmd->args[i][0] == REDIRECTION_OUT_APPEND)
-				ft_lstadd_back_file(&cmd->files,
-					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 4));
-			else if (cmd->args[i][0] == HER_DOC)
-				ft_lstadd_back_file(&cmd->files,
-					ft_lstnew_files(ft_strdup(cmd->args[i + 1]), 5));
-			i++;
-		}
-		if (cmd->args[i][0] == DOUBLE_QUOTES)
-			cmd->args[i] = remchar(cmd->args[i], DOUBLE_QUOTES);
-		if (cmd->args[i][0] == SINGLE_QUOTES)
-			cmd->args[i] = remchar(cmd->args[i], SINGLE_QUOTES);
+		cmd_init(cmd, i);
 	}
 	cmd->args = delete_array(cmd->args);
 	return (cmd);

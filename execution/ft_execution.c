@@ -6,11 +6,47 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 19:47:15 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 04:45:39 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static void	child_process(t_cmd *cmd, int cmd_count,
+			t_pipe *pipe_, t_export *export)
+{
+	char	*command;
+	char	**env;
+
+	env = lst_to_array(export);
+	while (cmd_count - 1)
+	{
+		execute_command(pipe_, cmd, export);
+		cmd_count--;
+		cmd = cmd->next;
+	}
+	multi_redirection(cmd);
+	command = ft_check_excute(cmd, env);
+	check_command_error(cmd, export, command, env);
+	ft_free_2d(env);
+}
+
+void	check_command_error(t_cmd *cmd, t_export *export,
+	char *command, char **env)
+{
+	if (!check_if_builting(cmd->command))
+		check_command(cmd, export);
+	else if (command)
+		execve(command, cmd->args, env);
+	else if (!command)
+	{
+		printf("minishell: %s: command not found\n", cmd->command);
+		free(command);
+		exit(127);
+	}
+	free(command);
+}
+
 void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 {
 	char	*command;
@@ -21,37 +57,35 @@ void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 	pipe_->pid = fork();
 	if (pipe_->pid == 0)
 	{
-		close(pipe_->pipefd[R]);
-		command = ft_check_excute(cmd, env);
-		if (!command)
-		{
-			printf("minishell: %s: command not found\n", cmd->command);
-			exit(127);
-		}
-		multi_redirection(cmd);		
+		multi_redirection(cmd);
 		dup2(pipe_->pipefd[W], STDOUT_FILENO);
 		close(pipe_->pipefd[W]);
-		if (check_command(cmd, export, pipe_) == -1)
-			execve(command, cmd->args, env);
+		close(pipe_->pipefd[R]);
+		command = ft_check_excute(cmd, env);
+		check_command_error(cmd, export, command, env);
 	}
 	else
 	{
-		wait(NULL);
 		close(pipe_->pipefd[W]);
 		dup2(pipe_->pipefd[R], STDIN_FILENO);
+		close(pipe_->pipefd[R]);
+		wait(&g_tools.exit_status);
 	}
 }
 
 void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 {
 	int		cmd_count;
-	char	*command;
+	int		tmp;
 	char	**env;
 
 	env = lst_to_array(export);
 	cmd_count = ft_lstsize(cmd);
+	tmp = cmd_count;
+	if (!cmd->command)
+		return;
 	if (!ft_strcmp(cmd->command, "exit")
-			|| !ft_strcmp(cmd->command, "EXIT"))
+		|| !ft_strcmp(cmd->command, "EXIT"))
 		ft_exit(cmd);
 	if (pipe(pipe_->pipefd) == -1)
 		return (perror("pipe"));
@@ -59,75 +93,11 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 	if (pipe_->pid == -1)
 		return (perror("fork"));
 	if (pipe_->pid == 0)
-	{
-		while(cmd_count - 1)
-		{
-			execute_command(pipe_, cmd, export);
-			cmd_count--;
-			cmd = cmd->next;
-		}
-		command = ft_check_excute(cmd, env);
-		if (!command)
-		{
-			printf("minishell: %s: command not found\n", cmd->command);
-			exit(127);
-		}
-		multi_redirection(cmd);
-		if(check_command(cmd, export, pipe_) == -1)
-			execve(command, cmd->args, env);
-		close (cmd->files->fd);
-		free(command);
-	}
+		child_process(cmd, cmd_count, pipe_, export);
 	else
-		waitpid(-1, NULL, 0);
-}
-
-char	*ft_check_path(char **env)
-{
-	char	*path_line;
-	int		i;
-
-	i = 0;
-	while (env[i])
 	{
-		if (ft_memcmp(env[i], "PATH=", 5) == 0)
-		{
-			path_line = env[i];
-			return (path_line + 5);
-		}
-		i++;
+		close(pipe_->pipefd[R]);
+		close(pipe_->pipefd[W]);
+		wait(&g_tools.exit_status);
 	}
-	return (NULL);
-}
-
-char	*ft_check_excute(t_cmd *cmd, char **env)
-{
-	int		i;
-	char	**splited_path;
-	char	*tmp;
-	char	*finall_path;
-	if (ft_strchr(cmd->command, '/'))
-		return(cmd->command);
-	splited_path = ft_split(ft_check_path(env), ':');
-	i = 0;
-	while (splited_path[i])
-	{
-		if (splited_path[i][ft_strlen(splited_path[i])] != '/')
-			tmp = ft_strjoin(splited_path[i], "/");
-		else
-			tmp = ft_strdup(splited_path[i]);
-		finall_path = ft_strjoin(tmp, cmd->command);
-		if (access(finall_path, X_OK | F_OK) == 0)
-		{
-			free(splited_path);
-			//free 2D array;
-			return (finall_path);
-		}
-		free(finall_path);
-		finall_path = NULL;
-		i++;
-	}
-	free(splited_path);
-	splited_path = NULL;
-	return (NULL);
 }

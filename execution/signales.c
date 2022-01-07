@@ -6,11 +6,12 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 23:43:22 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 03:59:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 01:43:23 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 void	sigint_handler(int sig)
 {
 	(void) sig;
@@ -23,7 +24,7 @@ void	sigint_handler(int sig)
 void	sigquit_handler(int sig)
 {
 	(void)sig;
-	if (g_is_runnig)
+	if (g_tools.is_runnig)
 		exit(131);
 }
 
