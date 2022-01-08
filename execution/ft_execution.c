@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/08 01:26:07 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:34:10 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static void	child_process(t_cmd *cmd, int cmd_count,
 void	check_command_error(t_cmd *cmd, t_export *export,
 	char *command, char **env)
 {
+	if (!check_if_builting(cmd->command) && cmd->next)
+	{
+		check_command(cmd, export);
+		exit(0);
+	}
 	if (!check_if_builting(cmd->command))
 		check_command(cmd, export);
 	else if (command)
@@ -62,6 +67,11 @@ void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 		close(pipe_->pipefd[W]);
 		close(pipe_->pipefd[R]);
 		command = ft_check_excute(cmd, env);
+		if (!check_if_builting(cmd->command) && cmd->next)
+		{
+			check_command(cmd, export);
+			exit(0);
+		}
 		check_command_error(cmd, export, command, env);
 	}
 	else
@@ -84,14 +94,11 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 	tmp = cmd_count;
 	if (!cmd->command)
 		return;
-	if (!ft_strcmp(cmd->command, "exit")
-		|| !ft_strcmp(cmd->command, "EXIT"))
-		ft_exit(cmd);
-	// if (!check_if_builting(cmd->command))
-	// {
-	// 	check_command(cmd, export);
-	// 	return ;
-	// }
+	if (!check_if_builting(cmd->command) && !cmd->next)
+	{
+		check_command(cmd, export);
+		return ;
+	}
 	if (pipe(pipe_->pipefd) == -1)
 		return (perror("pipe"));
 	pipe_->pid = fork();
@@ -106,3 +113,4 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 		wait(&g_tools.exit_status);
 	}
 }
+ 
