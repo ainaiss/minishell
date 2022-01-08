@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/08 00:34:59 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:43:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_search_in_list(t_export *export, char *name)
 		if (!ft_memcmp(temp->variable, name, ft_strlen(name)))
 			return (temp->variable);
 		temp = temp->next;
-	} 
+	}
 	return (NULL);
 }
 

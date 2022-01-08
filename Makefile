@@ -6,7 +6,7 @@
 #    By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/18 22:07:03 by abarchil          #+#    #+#              #
-#    Updated: 2022/01/08 00:24:19 by abarchil         ###   ########.fr        #
+#    Updated: 2022/01/08 01:42:26 by abarchil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CYAN = \033[0;36m
 
 YELLOW = \033[0;33m
 
-CFLAGS = 
+CFLAGS = -Wall -Werror -Wextra
 
 all : $(NAME)
 	@echo "$(RED) \

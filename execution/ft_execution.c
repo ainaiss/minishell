@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/08 01:34:10 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:42:14 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 		close(pipe_->pipefd[R]);
 		command = ft_check_excute(cmd, env);
 		if (!check_if_builting(cmd->command) && cmd->next)
-		{
-			check_command(cmd, export);
-			exit(0);
-		}
+			exit(check_command(cmd, export));
 		check_command_error(cmd, export, command, env);
 	}
 	else
@@ -86,14 +83,12 @@ void	execute_command(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 {
 	int		cmd_count;
-	int		tmp;
 	char	**env;
 
 	env = lst_to_array(export);
 	cmd_count = ft_lstsize(cmd);
-	tmp = cmd_count;
 	if (!cmd->command)
-		return;
+		return ;
 	if (!check_if_builting(cmd->command) && !cmd->next)
 	{
 		check_command(cmd, export);
@@ -113,4 +108,3 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 		wait(&g_tools.exit_status);
 	}
 }
- 

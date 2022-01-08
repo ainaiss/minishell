@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 00:08:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:38:11 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@
 # define DELIMITER -7
 # define DOUBLE_QUOTES -8
 # define SINGLE_QUOTES -9
-
-# define DEBUG(a)	printf("%s %d\n", __func__, a);
 
 typedef struct s_tools
 {
