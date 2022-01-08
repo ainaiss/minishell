@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 05:27:02 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/07 00:45:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:34:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_echo(t_cmd *cmd)
 	if (!cmd->args[1])
 	{
 		ft_putchar_fd('\n', 1);
-		exit(0);
+		return (0);
 	}
 	if (cmd->args[1][0] == '-' && cmd->args[1][1] == 'n')
 	{
@@ -44,5 +44,5 @@ int	ft_echo(t_cmd *cmd)
 	print_args(cmd, index);
 	if (new_line == 0)
 		ft_putchar_fd('\n', 1);
-	exit(0);
+	return (0);
 }

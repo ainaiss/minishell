@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 08:17:45 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/06 22:21:28 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:34:59 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ char	*ft_search_in_list(t_export *export, char *name)
 	temp = export;
 	if (temp == NULL)
 		return (NULL);
-	while (temp && ft_memcmp(temp->variable, name, ft_strlen(name)))
+	while (temp)
+	{
+		if (!ft_memcmp(temp->variable, name, ft_strlen(name)))
+			return (temp->variable);
 		temp = temp->next;
-	return (temp->variable);
+	} 
+	return (NULL);
 }
 
 void	ft_replace_directory(t_export *export)
@@ -67,7 +71,7 @@ int	ft_cd(t_cmd *cmd, t_export *export)
 	if (!cmd->args[1] || (cmd->args[1][0] == '~'
 		&& ft_strlen(cmd->args[1]) == 1))
 	{
-		tmp = ft_search_in_list(export, "HOME");
+		tmp = ft_search_in_list(export, "HOME=");
 		if (!tmp)
 			ft_putstr_fd("HOME not found\n", 2);
 		dir = remchar(&tmp[5], '\"');
@@ -85,5 +89,5 @@ int	ft_cd(t_cmd *cmd, t_export *export)
 		perror("cd");
 	replace_pwd(export);
 	ft_replace_directory(export);
-	exit(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/07 04:48:11 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:27:22 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	main(int argc, char **argv, char **env)
 
 	g_tools.exit_status = 0;
 	lampe = ft_calloc(2, 4);
+	if (argc > 1)
+		return (0);
 	environment_init(env, &export);
 	signals();
 	while (TRUE)
@@ -42,7 +44,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		words = parsing_word(command, words);
 		cmd = parsing(words, cmd);
-		//parse_dollar_signe(cmd, &export);
+		parse_dollar_signe(cmd, &export);
 		ft_execution(&pipe_, cmd, &export);
 		ft_clear_list(words);
 		free(command);

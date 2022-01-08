@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:15:57 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/07 04:42:25 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 21:52:14 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ t_cmd	*parse_commands(t_words *words, t_cmd *cmd)
 		&& ft_strlen(words->words) > 1)
 		cmd->command = ft_strdup(cmd->args[2]);
 	while (cmd->args[++i])
-	{
 		cmd_init(cmd, i);
-	}
 	cmd->args = delete_array(cmd->args);
 	return (cmd);
 }

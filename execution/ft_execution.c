@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 20:44:57 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/07 04:45:39 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:26:07 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ void	ft_execution(t_pipe *pipe_, t_cmd *cmd, t_export *export)
 	if (!ft_strcmp(cmd->command, "exit")
 		|| !ft_strcmp(cmd->command, "EXIT"))
 		ft_exit(cmd);
+	// if (!check_if_builting(cmd->command))
+	// {
+	// 	check_command(cmd, export);
+	// 	return ;
+	// }
 	if (pipe(pipe_->pipefd) == -1)
 		return (perror("pipe"));
 	pipe_->pid = fork();

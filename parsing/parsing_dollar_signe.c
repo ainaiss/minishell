@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:16:06 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/07 02:24:37 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:27:14 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,16 @@ static void	dollar_signe(t_cmd *cmd, t_export *export, int index, int count)
 {
 	char	*var;
 	char	*tmp_arg;
-
 	if (ft_strchr(cmd->args[index], DOLLAR_SIGNE))
 	{
 		if (cmd->args[index][0] == DOLLAR_SIGNE && cmd->args[index][1] == '?')
 			check_question_mark(cmd->args[index]);
-		while (cmd->args[index][count]
-			&& cmd->args[index][count] != DOLLAR_SIGNE)
+		while (cmd->args[index][count] && cmd->args[index][count] != DOLLAR_SIGNE)
 			count++;
 		if (!cmd->args[index][count])
 			return ;
 		tmp_arg = ft_substr(cmd->args[index], 0, count);
-		var = remchar(get_var_value(get_var(
-						&cmd->args[index][count + 1], export)), '\"');
+		var = remchar(get_var_value(get_var(&cmd->args[index][count + 1], export)), '\"');
 		if (!var)
 		{
 			cmd->args[index] = NULL;
@@ -78,10 +75,11 @@ void	parse_dollar_signe(t_cmd *cmd, t_export *export)
 	int		index;
 	int		count;
 
-	index = 0;
 	count = 0;
+
 	while (cmd)
 	{
+		index = 0;
 		while (cmd->args[++index])
 			dollar_signe(cmd, export, index, 0);
 		cmd = cmd->next;

@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 23:43:22 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/07 01:43:23 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 19:33:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	sigquit_handler(int sig)
 void	signals(void)
 {
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

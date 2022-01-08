@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 19:30:58 by abarchil          #+#    #+#             */
-/*   Updated: 2021/12/30 21:38:54 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 22:34:36 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)s);
 		s++;
 	}
-	if (*s == '\0' && c == '\0')
-		return ((char *)s);
+	// if (*s == '\0' && c == '\0')
+	// 	return ((char *)s);
 	return (NULL);
 }
 

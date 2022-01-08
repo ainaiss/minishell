@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 15:24:09 by abarchil          #+#    #+#             */
-/*   Updated: 2022/01/07 01:45:11 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:35:12 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_export(t_cmd *cmd, t_export *export)
 	else if (cmd->args[1] && ft_isdigit(cmd->args[1][0]))
 	{
 		printf("%s : not a valid identifier\n", cmd->args[1]);
-		exit(1);
+		return (1);
 	}
 	else if (cmd->args[1])
 	{
@@ -83,5 +83,5 @@ int	ft_export(t_cmd *cmd, t_export *export)
 		}
 		parse_dollar_signe(cmd, export);
 	}
-	exit(0);
+	return (0);
 }

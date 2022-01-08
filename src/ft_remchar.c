@@ -6,7 +6,7 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:46:10 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/04 01:27:22 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/07 21:33:31 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*remchar(char *s, char c)
 		return (NULL);
 	while (s[count])
 	{
-		while (s[count] == c)
+		while (s[count] && s[count] == c)
 			count++;
 		res[res_count++] = s[count++];
 	}
