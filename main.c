@@ -6,12 +6,25 @@
 /*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 01:52:59 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:00:41 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
+static int is_empty(char *command)
+{
+	int	index;
 
+	index = 0;
+	while (command[index])
+	{
+		if (command[index] == ' ' && command[index] == '\t')
+			index++;
+		else
+			return (0);
+	}
+	return (1);
+}
 static void	minishell(int *lampe, t_export *export)
 {
 	t_words		*words;
@@ -22,9 +35,11 @@ static void	minishell(int *lampe, t_export *export)
 	cmd = NULL;
 	words = NULL;
 	command = readline("\e[1;91mminishell_> \e[0m");
-	add_history(command);
 	if (!command)
 		ft_exit(cmd);
+	if (is_empty(command))
+		return ;
+	add_history(command);
 	if (!command[0])
 		return ;
 	command = lexing(command, &lampe);
