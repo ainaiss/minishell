@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:17:51 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 02:07:32 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:59:59 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,32 @@ void	ft_clear_list(t_words *words)
 void	ft_clear_list_cmd(t_cmd *cmd)
 {
 	t_cmd	*tmp;
-	int		index;
 
-	index = -1;
-	if (!cmd)
-		return ;
-	if (cmd->command)
+	while (cmd)
 	{
-		while (cmd)
-		{
-			index++;
-			tmp = cmd;
-			cmd = cmd->next;
+		tmp = cmd;
+		cmd = cmd->next;
+		tmp->next = NULL;
+		if (tmp->command)
 			free(tmp->command);
-			tmp->command = NULL;
-		}
+		if (tmp->args)
+			ft_free_2d(tmp->args);
+	}
+}
+
+void	ft_clear_list_export(t_export *export)
+{
+	t_export		*tmp;
+
+	if (!export)
+		return ;
+	tmp = export;
+	while (export->variable)
+	{
+		tmp = export;
+		export = export->next;
+		tmp->next = NULL;
+		free(tmp->variable);
+		free(tmp);
 	}
 }

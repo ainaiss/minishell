@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 02:06:20 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:58:45 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int is_empty(char *command)
 	}
 	return (1);
 }
+
 static void	minishell(int *lampe, t_export *export)
 {
 	t_words		*words;
@@ -50,6 +51,7 @@ static void	minishell(int *lampe, t_export *export)
 	parse_dollar_signe(cmd, export);
 	ft_execution(&pipe_, cmd, export);
 	ft_clear_list(words);
+	ft_clear_list_cmd(cmd);
 	free(command);
 }
 
@@ -71,5 +73,7 @@ int	main(int argc, char **argv, char **env)
 	signals();
 	while (TRUE)
 		minishell(lampe, &export);
+	ft_clear_list_export(&export);
+	//while (1);
 	return (0);
 }

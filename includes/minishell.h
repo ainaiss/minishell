@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 15:54:20 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 01:38:11 by abarchil         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:21:58 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ t_export	*ft_lstnew(void *content);
 void		ft_del_node_cmd(t_cmd *lst);
 void		ft_clear_list(t_words *words);
 void		ft_clear_list_cmd(t_cmd *cmd);
+void		ft_clear_list_export(t_export *export);
 t_cmd		*ft_lstnew_cmd(char **content);
 t_words		*ft_lstnew_words(void *content);
 int			ft_lstsize_export(t_export *lst);
