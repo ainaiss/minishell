@@ -6,12 +6,13 @@
 /*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:06:37 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 02:58:45 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:01:08 by fel-boua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
-static int is_empty(char *command)
+
+static int	is_empty(char *command)
 {
 	int	index;
 
@@ -74,6 +75,5 @@ int	main(int argc, char **argv, char **env)
 	while (TRUE)
 		minishell(lampe, &export);
 	ft_clear_list_export(&export);
-	//while (1);
 	return (0);
 }

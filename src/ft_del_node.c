@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fel-boua <fel-boua@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abarchil <abarchil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 07:17:51 by fel-boua          #+#    #+#             */
-/*   Updated: 2022/01/08 02:59:59 by fel-boua         ###   ########.fr       */
+/*   Updated: 2022/01/09 10:55:55 by abarchil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_clear_list_cmd(t_cmd *cmd)
 		tmp->next = NULL;
 		if (tmp->command)
 			free(tmp->command);
-		if (tmp->args)
+		else if (tmp->args)
 			ft_free_2d(tmp->args);
 	}
 }
